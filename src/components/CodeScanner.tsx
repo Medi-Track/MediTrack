@@ -3,7 +3,7 @@ import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 export const CodeScanner = () => {
 	const [data, setData] = useState<string>("Not Found");
-	const [stopStream, setStopStream] = React.useState(true);
+	const [stopStream, setStopStream] = useState<boolean>(true);
 	return (
 		<>
 			<BarcodeScannerComponent
