@@ -6,6 +6,13 @@ export const CodeScanner = () => {
 	const [stopStream, setStopStream] = useState<boolean>(true);
 	return (
 		<>
+			<button
+				className="flex justify-center items-center"
+				onClick={() => setStopStream(false)}
+			>
+				Scan
+			</button>
+
 			<BarcodeScannerComponent
 				width={500}
 				height={500}

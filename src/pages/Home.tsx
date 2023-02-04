@@ -8,12 +8,9 @@ import { CodeScanner } from "../components/CodeScanner";
 export const Home = () => {
 	return (
 		<div>
-			<Barcode
-				value="123456789012"
-				height={50}
-				width={1}
-				displayValue={false}
-			/>
+			<div className="flex justify-center items-center">
+				<Barcode value="123456789012" displayValue={false} />
+			</div>
 			<CodeScanner />
 
 			<h1>Home</h1>
