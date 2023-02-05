@@ -9,7 +9,13 @@ export const Home = () => {
 	return (
 		<div>
 			<div className="flex justify-center items-center">
-				<Barcode value="63d8" displayValue={true} />
+				<Barcode
+					textMargin={2}
+					height={80}
+					width={1}
+					value="63dcf41c7e0fcd85b132aa59"
+					displayValue={true}
+				/>
 			</div>
 			<CodeScanner />
 

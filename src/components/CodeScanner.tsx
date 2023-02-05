@@ -21,9 +21,9 @@ function CodeScanner() {
 						torch={torchOn}
 						onUpdate={(err: any, result: any) => {
 							if (result) {
+								alert(result.text);
 								const newData = [...data, result.text];
 								setData(newData);
-								alert(result.text);
 								console.log(data);
 							} else {
 								console.log("No found");
