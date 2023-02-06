@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { selectProductWithUniqId } from "../redux/slice/productSlice";
+import {
+	selectProductWithUniqId,
+	addProduct,
+} from "../redux/slice/productSlice";
 import { Product } from "../types";
 
 function CodeScanner() {
-	const products = useSelector((state: RootState) => state.product.items);
+	// const products = useSelector((state: RootState) => state.product.items);
+
+	const [products, setProducts] = useState<Product[]>([]);
 
 	const [data, setData] = useState<Product[]>([]);
 
@@ -19,6 +25,19 @@ function CodeScanner() {
 	useEffect(() => {
 		console.log(data);
 	}, [data]);
+
+	const getProducts = async () => {
+		try {
+			const { data } = await axios.get("http://localhost:5000/api/product");
+			setProducts(data);
+			dispatch(addProduct(data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	useEffect(() => {
+		getProducts();
+	}, []);
 
 	return (
 		<>
