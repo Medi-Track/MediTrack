@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from "../redux/slice/productSlice";
+import { selectProduct, addProduct } from "../redux/slice/productSlice";
 import type { RootState } from "../redux/store";
 
 //components
@@ -25,12 +25,10 @@ const Products = () => {
 		getProducts();
 	}, []);
 
-	console.log(products);
-
 	return (
 		<>
 			<div className="">
-				{products?.map((product: Product) => (
+				{products?.slice(1, 6)?.map((product: Product) => (
 					<Item key={product._id} item={product} />
 				))}
 			</div>

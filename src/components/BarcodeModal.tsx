@@ -13,7 +13,6 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 	function closeModal() {
 		setIsOpen(false);
 	}
-
 	return (
 		<div>
 			<Transition appear show={isOpen} as={Fragment}>

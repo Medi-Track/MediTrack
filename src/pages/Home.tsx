@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from "../redux/slice/productSlice";
+import { selectProduct, addProduct } from "../redux/slice/productSlice";
 import type { RootState } from "../redux/store";
 // components
 import CodeScanner from "../components/CodeScanner";

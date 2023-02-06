@@ -39,4 +39,10 @@ export const productSlice = createSlice({
 
 export const { addProduct, removeProduct } = productSlice.actions;
 
+export const selectProduct = (state: RootState) => state.product.items;
+
+export const selectProductWithUniqId = (state: RootState, uniq_id: string) => {
+	return state.product.items.find((product) => product._id === uniq_id);
+};
+
 export default productSlice.reducer;
