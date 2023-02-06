@@ -11,33 +11,18 @@ import {
 import { Product } from "../types";
 
 function CodeScanner() {
-	// const products = useSelector((state: RootState) => state.product.items);
-
-	const [products, setProducts] = useState<Product[]>([]);
+	const products = useSelector((state: RootState) => state.product.items);
 
 	const [data, setData] = useState<Product[]>([]);
-
-	const dispatch = useDispatch();
 
 	const [torchOn, setTorchOn] = useState(false);
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
-		console.log(data);
+		console.log("data", data);
 	}, [data]);
 
-	const getProducts = async () => {
-		try {
-			const { data } = await axios.get("http://localhost:5000/api/product");
-			setProducts(data);
-			dispatch(addProduct(data));
-		} catch (err) {
-			console.log(err);
-		}
-	};
-	useEffect(() => {
-		getProducts();
-	}, []);
+	console.log("products", products);
 
 	return (
 		<>
@@ -57,13 +42,13 @@ function CodeScanner() {
 								if (item) {
 									console.log(item);
 									const newData: Product[] = [...data, item];
+									console.log("new data", newData);
+									alert("data found");
 									setData(newData);
 									console.log(data);
 								} else {
 									alert("No Item Found");
 								}
-							} else {
-								console.log("No found");
 							}
 						}}
 					/>
