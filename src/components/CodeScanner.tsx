@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { selectProductWithUniqId } from "../redux/slice/productSlice";
+import { Product } from "../types";
 
 function CodeScanner() {
-	const [data, setData] = useState<string[]>([]);
+	const products = useSelector((state: RootState) => state.product.items);
+
+	const [data, setData] = useState<Product[]>([]);
+
+	const dispatch = useDispatch();
+
 	const [torchOn, setTorchOn] = useState(false);
 	const [show, setShow] = useState(false);
 
@@ -22,9 +32,17 @@ function CodeScanner() {
 						onUpdate={(err: any, result: any) => {
 							if (result) {
 								alert(result.text);
-								const newData = [...data, result.text];
-								setData(newData);
-								console.log(data);
+								const item = products.find(
+									(product) => product?.uniq_id === result.text
+								);
+								if (item) {
+									console.log(item);
+									const newData: Product[] = [...data, item];
+									setData(newData);
+									console.log(data);
+								} else {
+									alert("No Item Found");
+								}
 							} else {
 								console.log("No found");
 							}
@@ -34,8 +52,8 @@ function CodeScanner() {
 
 				{data?.length > 0 &&
 					data?.map((item) => (
-						<p className="text-gray-500 " key={item}>
-							{item}
+						<p className="text-white bg-red-400 " key={item._id}>
+							{item.title}
 						</p>
 					))}
 				{!(data.length > 0) && "No data found"}

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-// import io from "socket.io-client";
-import CodeScanner from "../components/CodeScanner";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectProduct, addProduct } from "../redux/slice/productSlice";
 import type { RootState } from "../redux/store";
-// const socket = io("http://localhost:5000");
-// import { compressor } from "../functions/functions";
 
-const Home = () => {
+//components
+import Item from "../components/Item";
+import { Product } from "../types";
+
+const Products = () => {
 	const products = useSelector((state: RootState) => state.product.items);
 
 	const dispatch = useDispatch();
@@ -24,11 +24,16 @@ const Home = () => {
 	useEffect(() => {
 		getProducts();
 	}, []);
+
 	return (
-		<div>
-			<CodeScanner />
-		</div>
+		<>
+			<div className="">
+				{products?.slice(1, 6)?.map((product: Product) => (
+					<Item key={product._id} item={product} />
+				))}
+			</div>
+		</>
 	);
 };
 
-export default Home;
+export default Products;
