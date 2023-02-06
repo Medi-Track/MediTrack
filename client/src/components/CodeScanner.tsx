@@ -4,10 +4,7 @@ import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import {
-	selectProductWithUniqId,
-	addProduct,
-} from "../redux/slice/productSlice";
+import { addProduct } from "../redux/slice/productSlice";
 import { Product } from "../types";
 
 function CodeScanner() {
@@ -60,7 +57,6 @@ function CodeScanner() {
 							{item.title}
 						</p>
 					))}
-				{!(data.length > 0) && "No data found"}
 
 				<button
 					className="  bg-red-400 "
