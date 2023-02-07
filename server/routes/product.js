@@ -46,6 +46,7 @@ router.delete("/:id", async (req, res) => {
 	}
 });
 
+// get all products
 router.get("/", async (req, res) => {
 	try {
 		const products = await Product.find();

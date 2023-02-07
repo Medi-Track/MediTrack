@@ -16,10 +16,25 @@ function CodeScanner() {
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
-		console.log("data", data);
+		if (!products) {
+			console.log("products", products);
+		}
+		console.log("data in use effect", data);
 	}, [data]);
 
-	console.log("products", products);
+	const [input, setInput] = useState("");
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const item: Product[] = products.filter(
+			(product) => product?.uniq_id === input
+		);
+		if (item) {
+			alert("data found");
+			setData([...data, ...item]);
+		} else {
+			alert("No Item Found");
+		}
+	};
 
 	return (
 		<>
@@ -40,7 +55,6 @@ function CodeScanner() {
 									console.log(item);
 									alert("data found");
 									setData([...data, ...item]);
-									console.log(data);
 								} else {
 									alert("No Item Found");
 								}
@@ -65,6 +79,17 @@ function CodeScanner() {
 				<button className="bg-blue-400" onClick={() => setShow(!show)}>
 					Switch Carema {show ? "Off" : "On"}
 				</button>
+				<div>
+					<form onSubmit={handleSubmit}>
+						<input
+							className="p-2 border-2 border-gray-300 rounded-lg"
+							value={input}
+							onChange={(e) => setInput(e.target.value)}
+							type="text"
+						/>
+						<button className="p-2 bg-red-400">Submit</button>
+					</form>
+				</div>
 			</div>
 		</>
 	);
