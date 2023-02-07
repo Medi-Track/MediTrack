@@ -29,6 +29,9 @@ const Products = () => {
 
 	return (
 		<>
+		<div>
+			<h1>Product</h1>
+		</div>
 			<div className="">
 				{products?.map((product: Product) => (
 					<Item key={product._id} item={product} />
