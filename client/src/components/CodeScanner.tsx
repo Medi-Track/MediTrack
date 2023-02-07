@@ -33,15 +33,13 @@ function CodeScanner() {
 						onUpdate={(err: any, result: any) => {
 							if (result) {
 								alert(result.text);
-								const item = products.find(
+								const item: Product | undefined = products.find(
 									(product) => product?.uniq_id === result.text
 								);
 								if (item) {
 									console.log(item);
-									const newData: Product[] = [...data, item];
-									console.log("new data", newData);
 									alert("data found");
-									setData(newData);
+									setData([...data, item]);
 									console.log(data);
 								} else {
 									alert("No Item Found");
