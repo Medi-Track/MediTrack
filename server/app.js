@@ -24,5 +24,5 @@ app.get("/", async (req, res) => {
 app.use("/api/product", productRoute);
 
 app.listen(process.env.PORT || 5000, () => {
-	console.log(`server is on 5000 or  running ${process.env.PORT}`);
+	console.log(`server is running on port ${process.env.PORT || 5000}`);
 });

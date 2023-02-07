@@ -15,7 +15,7 @@ const Products = () => {
 	const dispatch = useDispatch();
 	const getProducts = async () => {
 		try {
-			const { data } = await axios.get("http://localhost:5000/api/product");
+			const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/product`);
 			dispatch(addProduct(data));
 		} catch (err) {
 			console.log(err);
