@@ -51,7 +51,7 @@ function CodeScanner() {
 								onDetect(result.text.toString());
 							}
 							if (err) {
-								console.log(err);
+								// console.log(err);
 							}
 						}}
 					/>

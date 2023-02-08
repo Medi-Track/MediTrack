@@ -5,7 +5,8 @@ const uniqid = require("uniqid");
 //Create Products
 router.post("/create", async (req, res) => {
 	console.log(req.body);
-	let uniq_id = uniqid.time();
+	let uniq_id = uniqid.process();
+	uniq_id = uniq_id.slice(uniq_id.length - 5, uniq_id.length);
 	const newProduct = new Product({ ...req.body, uniq_id });
 	try {
 		const savedProduct = await newProduct.save();
