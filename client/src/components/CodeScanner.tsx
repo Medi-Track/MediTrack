@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { addProduct } from "../redux/slice/productSlice";
 import { Product } from "../types";
+import BarcodeScanner from "./molecules/BarcodeScanner";
 
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
@@ -22,9 +23,9 @@ function CodeScanner() {
 		console.log("data in use effect", data);
 	}, [data]);
 
-	const [input, setInput] = useState("");
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	// const [input, setInput] = useState("");
+	const onDetect = (input: any) => {
+		console.log(input);
 		const item: Product[] = products.filter(
 			(product) => product?.uniq_id === input
 		);
@@ -47,21 +48,15 @@ function CodeScanner() {
 						torch={torchOn}
 						onUpdate={(err: any, result: any) => {
 							if (result) {
-								alert(result.text);
-								const item: Product[] = products.filter(
-									(product) => product?.uniq_id === result.text
-								);
-								if (item) {
-									console.log(item);
-									alert("data found");
-									setData([...data, ...item]);
-								} else {
-									alert("No Item Found");
-								}
+								onDetect(result.text.toString());
+							}
+							if (err) {
+								console.log(err);
 							}
 						}}
 					/>
 				)}
+				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
 				{data?.length > 0 &&
 					data?.map((item) => (
@@ -80,7 +75,7 @@ function CodeScanner() {
 					Switch Carema {show ? "Off" : "On"}
 				</button>
 				<div>
-					<form onSubmit={handleSubmit}>
+					{/* <form onSubmit={handleSubmit}>
 						<input
 							className="p-2 border-2 border-gray-300 rounded-lg"
 							value={input}
@@ -88,7 +83,7 @@ function CodeScanner() {
 							type="text"
 						/>
 						<button className="p-2 bg-red-400">Submit</button>
-					</form>
+					</form> */}
 				</div>
 			</div>
 		</>
