@@ -23,11 +23,11 @@ function CodeScanner() {
 		console.log("data in use effect", data);
 	}, [data]);
 
-	// const [input, setInput] = useState("");
-	const onDetect = (input: any) => {
-		console.log(input);
+	const [input, setInput] = useState("");
+	const handleSubmit = (uniq_id: any) => {
+		console.log(uniq_id);
 		const item: Product[] = products.filter(
-			(product) => product?.uniq_id === input
+			(product) => product?.uniq_id === uniq_id
 		);
 		if (item) {
 			alert("data found");
@@ -48,7 +48,7 @@ function CodeScanner() {
 						torch={torchOn}
 						onUpdate={(err: any, result: any) => {
 							if (result) {
-								onDetect(result.text.toString());
+								handleSubmit(result.text.toString());
 							}
 							if (err) {
 								// console.log(err);
@@ -75,7 +75,7 @@ function CodeScanner() {
 					Switch Carema {show ? "Off" : "On"}
 				</button>
 				<div>
-					{/* <form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit}>
 						<input
 							className="p-2 border-2 border-gray-300 rounded-lg"
 							value={input}
@@ -83,7 +83,7 @@ function CodeScanner() {
 							type="text"
 						/>
 						<button className="p-2 bg-red-400">Submit</button>
-					</form> */}
+					</form>
 				</div>
 			</div>
 		</>
