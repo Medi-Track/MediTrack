@@ -1,14 +1,38 @@
-import React from 'react'
-import Button from '../components/Button';
-import {BsFacebook, BsFillTelephoneFill, BsInstagram, BsLinkedin, BsTwitter} from "react-icons/bs"
-import {MdEmail} from "react-icons/md"
-import { ImLocation } from 'react-icons/im';
+import React from "react";
+import {
+  BsFacebook,
+  BsFillTelephoneFill,
+  BsInstagram,
+  BsLinkedin,
+  BsTwitter,
+} from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
+import { ImLocation } from "react-icons/im";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { twMerge } from "tailwind-merge";
+import Input from "../components/input.component";
 
-import {twMerge} from 'tailwind-merge'
+const schema = yup.object().shape({
+  username: yup.string().required(),
+  email: yup.string().email().required(),
+  message: yup.string().required(),
+});
+
 
 const ContactUs = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const submitForm = (data:object) => {
+    console.log(data)
+  };
   return (
-<div className="mx-auto mt-28">
+    <div className="mx-auto mt-28">
       <div className="flex flex-col items-center justify-center header">
         <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           Contact Us
@@ -16,7 +40,7 @@ const ContactUs = () => {
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         <p
           className={twMerge(
-            "mt-4 text-sm",
+            "mt-4 text-sm"
             // isDarkMode ? "text-gray-300" : "text-gray-400"
           )}
         >
@@ -26,7 +50,7 @@ const ContactUs = () => {
       <div className="mt-6 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[780px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl p-4  flex flex-col-reverse sm:flex-row ">
         <div
           className={twMerge(
-            "bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between",
+            "bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between"
             // isDarkMode ? "text-black" : "text-white"
           )}
         >
@@ -106,48 +130,46 @@ const ContactUs = () => {
           </div>
         </div>
         <div className="p-8 basis-1/2">
-          <form action="" className="mx-auto" >
+          <form
+            action=""
+            className="mx-auto"
+            onSubmit={handleSubmit(submitForm)}
+          >
             <div className="flex flex-col gap-8 body">
-              <input
-                // data={username}
-                // setData={setUsername}
-                // inputFieldName="Username"
-                // type="text"
-                // setIsInputValid={setIsInputValid}
-                // isInputValid={isInputValid}
+              <Input
+                register={register}
+                type="text"
+                name="username"
+                placeholder="username..."
+                errorMessage={errors.username?.message as string}
               />
-              <input
-                // data={email}
-                // setData={setEmail}
-                // inputFieldName="Email"
-                // type="text"
-                // setIsInputValid={setIsInputValid}
-                // isInputValid={isInputValid}
+              <Input
+                register={register}
+                type="text"
+                name="email"
+                placeholder="email..."
+                errorMessage={errors.email?.message as string}
               />
-              <textarea
-                // data={message}
-                // setData={setMessage}
-                // inputFieldName="Message"
-                // type="text"
-                // setIsInputValid={setIsInputValid}
-                // isInputValid={isInputValid}
-              />
+              <Input
+                register={register}
+                type="text"
+                name="message"
+                placeholder="username..."
+                errorMessage={errors.message?.message as string}
+                rows={6}
+              ></Input>
             </div>
 
             <div className="flex justify-around mt-8 footer">
-                <Button
-                  type="submit"
-                  className="px-4 py-2 btn-base"
-                >
-                  Submit
-                </Button>
-              )
+              <button type="submit" className="px-4 py-2">
+                Submit
+              </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-    );
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

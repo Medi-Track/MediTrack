@@ -40,13 +40,13 @@ const Navbar = () => {
                   to="/aboutus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
-                  About Us
+                  About
                 </Link>
                 <Link
                   to="/contactus"
                   className="hover:text-[color:var(--color-primary)] hidden lg:block"
                 >
-                  Contact Us
+                  Contact
                 </Link>
               </ul>
             </div>
