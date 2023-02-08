@@ -29,7 +29,7 @@ function CodeScanner() {
 		const item: Product[] = products.filter(
 			(product) => product?.uniq_id === input
 		);
-		if (item) {
+		if (item.length !== 0) {
 			alert("data found");
 			setData([...data, ...item]);
 		} else {
