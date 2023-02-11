@@ -38,10 +38,46 @@ export const scannedProductSlice = createSlice({
 			}
 			state.medicine = newBasket;
 		},
+
+		increaseQuantity: (
+			state: ScannedProductBasket,
+			action: PayloadAction<{ _id: string }>
+		) => {
+			const index = state.medicine.findIndex(
+				(items) => items._id === action.payload._id
+			);
+			let newBasket = [...state.medicine];
+			if (index >= 0) {
+				newBasket[index].stock++;
+			} else {
+				console.log("Can't increase quantity");
+			}
+			state.medicine = newBasket;
+		},
+
+		decreaseQuantity: (
+			state: ScannedProductBasket,
+			action: PayloadAction<{ _id: string }>
+		) => {
+			const index = state.medicine.findIndex(
+				(items) => items._id === action.payload._id
+			);
+			let newBasket = [...state.medicine];
+			if (index >= 0) {
+				if (newBasket[index].stock > 0) newBasket[index].stock--;
+			} else {
+				console.log("Can't decrease quantity");
+			}
+			state.medicine = newBasket;
+		},
 	},
 });
 
-export const { addScannedProduct, removeScannedProduct } =
-	scannedProductSlice.actions;
+export const {
+	addScannedProduct,
+	removeScannedProduct,
+	increaseQuantity,
+	decreaseQuantity,
+} = scannedProductSlice.actions;
 
 export default scannedProductSlice.reducer;

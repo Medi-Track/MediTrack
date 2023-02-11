@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+	increaseQuantity,
+	decreaseQuantity,
+} from "../../redux/slice/scannedProductSlice";
+//types
 import { Product } from "../../types";
 
 const Item = ({ item }: any) => {
-	const [stock, setStock] = useState(1);
+	// const [stock, setStock] = useState(1);
+	const dispatch = useDispatch();
 	return (
 		<div key={item?._id} className="mt-2 flex justify-between items-center">
 			<div
@@ -25,14 +33,16 @@ const Item = ({ item }: any) => {
 				<span>{item?.price}</span>
 				<div className="flex items-center space-x-4">
 					<span
-						onClick={() => stock > 0 && setStock(stock - 1)}
+						onClick={() =>
+							item.stock > 0 && dispatch(decreaseQuantity(item._id))
+						}
 						className=" cursor-pointer px-2 text-2xl py-1 border-[2px] border-gray-200"
 					>
 						-
 					</span>
-					<span>{stock}</span>
+					<span>{item.stock}</span>
 					<span
-						onClick={() => setStock(stock + 1)}
+						onClick={() => dispatch(increaseQuantity(item._id))}
 						className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
 					>
 						+

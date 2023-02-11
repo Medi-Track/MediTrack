@@ -15,7 +15,12 @@ const ScannedMedicine = () => {
 		<div>
 			{medicines?.length > 0 &&
 				medicines?.map((medicine) => (
-					<Item key={medicine._id} item={medicine} />
+					<div
+						key={medicine._id}
+						className="flex max-w-md mx-auto flex-col justify-center items-center"
+					>
+						<Item item={medicine} />
+					</div>
 				))}
 		</div>
 	);
