@@ -34,7 +34,7 @@ const Item = ({ item }: any) => {
 				<div className="flex items-center space-x-4">
 					<span
 						onClick={() => {
-							item.stock > 0 && dispatch(decreaseQuantity(item._id));
+							item.stock > 0 && dispatch(decreaseQuantity(item));
 							console.log("stock", item.stock);
 							console.log("id", item._id);
 						}}
@@ -44,7 +44,7 @@ const Item = ({ item }: any) => {
 					</span>
 					<span>{item.stock}</span>
 					<span
-						onClick={() => dispatch(increaseQuantity(item._id))}
+						onClick={() => dispatch(increaseQuantity(item))}
 						className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
 					>
 						+
