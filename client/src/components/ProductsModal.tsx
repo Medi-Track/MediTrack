@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Barcode from "react-barcode";
 import { Product } from "../types";
+import Item from "./molecules/Item";
 
 interface Props {
 	isOpen: boolean;
@@ -18,8 +19,6 @@ const ProductsModal = ({
 	isCameraOpen,
 	setIsCameraOpen,
 }: Props) => {
-	const [stock, setStock] = useState(1);
-
 	function closeModal() {
 		setIsOpen(false);
 	}
@@ -60,51 +59,20 @@ const ProductsModal = ({
 										as="h3"
 										className="text-lg font-medium leading-6 text-gray-900"
 									>
-										This Product is Scanned
-									</Dialog.Title>
-									{data && (
-										<div
-											key={data._id}
-											className="mt-2 flex justify-between items-center"
-										>
-											<div
-												className="items-center flex
-                                         space-x-1 "
+										<div className="flex justify-between items-center">
+											<span>Scanned Product</span>
+											<button
+												type="button"
+												className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+												onClick={() => {
+													closeModal();
+												}}
 											>
-												<span className="p-6 rounded-full bg-gray-400 "></span>
-												<div
-													className="flex flex-col space-y-1
-                                        "
-												>
-													<span>{data.title}</span>
-													<span>{data.brand}</span>
-												</div>
-											</div>
-											<div
-												className=" flex
-                                         flex-col space-y-1"
-											>
-												<span>{data.price}</span>
-												<div className="flex items-center space-x-4">
-													<span
-														onClick={() =>
-															stock > 0 && setStock(stock - 1)
-														}
-														className=" cursor-pointer px-2 text-2xl py-1 border-[2px] border-gray-200"
-													>
-														-
-													</span>
-													<span>{stock}</span>
-													<span
-														onClick={() => setStock(stock + 1)}
-														className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
-													>
-														+
-													</span>
-												</div>
-											</div>
+												Done
+											</button>
 										</div>
-									)}
+									</Dialog.Title>
+									{data && <Item item={data} />}
 
 									<div className="mt-4 flex justify-between items-center">
 										<button
