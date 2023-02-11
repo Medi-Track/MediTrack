@@ -13,6 +13,9 @@ const Navbar = () => {
 						<Link to="/product" className="">
 							Products
 						</Link>
+						<Link to="/scanned-medicine" className="">
+							ScannedMedicine
+						</Link>
 					</div>
 				</div>
 			</nav>

@@ -1,9 +1,12 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Barcode from "react-barcode";
-import { Product } from "../types";
+// components
 import Item from "./molecules/Item";
-
+// redux
+import { addScannedProduct } from "../redux/slice/scannedProductSlice";
+import { useDispatch } from "react-redux";
+// types
+import { Product } from "../types";
 interface Props {
 	isOpen: boolean;
 	isCameraOpen: boolean;
@@ -19,6 +22,7 @@ const ProductsModal = ({
 	isCameraOpen,
 	setIsCameraOpen,
 }: Props) => {
+	const dispatch = useDispatch();
 	function closeModal() {
 		setIsOpen(false);
 	}
@@ -26,6 +30,13 @@ const ProductsModal = ({
 	function openCamera() {
 		setIsCameraOpen(true);
 	}
+
+	const handleDispatch = () => {
+		if (!data) return;
+		dispatch(addScannedProduct(data));
+		closeModal();
+		openCamera();
+	};
 
 	return (
 		<div>
@@ -65,6 +76,8 @@ const ProductsModal = ({
 												type="button"
 												className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 												onClick={() => {
+													if (!data) return;
+													dispatch(addScannedProduct(data));
 													closeModal();
 												}}
 											>
@@ -89,8 +102,7 @@ const ProductsModal = ({
 											type="button"
 											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 											onClick={() => {
-												closeModal();
-												openCamera();
+												handleDispatch();
 											}}
 										>
 											Scan Next Product

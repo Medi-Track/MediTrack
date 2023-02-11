@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productSlice from "./slice/productSlice";
+import scannedProductSlice from "./slice/scannedProductSlice";
 
 export const store = configureStore({
 	reducer: {
 		product: productSlice,
+		scannedProduct: scannedProductSlice,
 	},
 });
 
