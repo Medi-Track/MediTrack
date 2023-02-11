@@ -8,10 +8,13 @@ import { addProduct } from "../redux/slice/productSlice";
 import { Product } from "../types";
 import BarcodeScanner from "./molecules/BarcodeScanner";
 
+import { CiCamera } from "react-icons/ci";
+
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
 
 	const [data, setData] = useState<Product[]>([]);
+	const [input, setInput] = useState<string>("");
 
 	const [torchOn, setTorchOn] = useState(false);
 	const [show, setShow] = useState(false);
@@ -23,7 +26,6 @@ function CodeScanner() {
 		console.log("data in use effect", data);
 	}, [data]);
 
-	const [input, setInput] = useState<string>("");
 	const handleSubmit = () => {
 		console.log(input);
 		const item: Product[] = products.filter(
@@ -46,22 +48,46 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				{show && (
-					<BarcodeScannerComponent
-						width={500}
-						height={500}
-						delay={1000}
-						torch={torchOn}
-						onUpdate={(err: any, result: any) => {
-							if (result) {
-								setInput(result.text);
-							}
-							if (err) {
-								// console.log(err);
-							}
-						}}
-					/>
-				)}
+				<div className="flex mx-auto bg-gray-200 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
+					{show ? (
+						<BarcodeScannerComponent
+							delay={1000}
+							torch={torchOn}
+							onUpdate={(err: any, result: any) => {
+								if (result) {
+									setInput(result.text);
+								}
+								if (err) {
+									// console.log(err);
+								}
+							}}
+						/>
+					) : (
+						<div className="">
+							<span
+								className=" cursor-pointer "
+								onClick={() => setShow(!show)}
+							>
+								<CiCamera className="text-7xl text-gray-400 hover:to-gray-700" />
+							</span>
+						</div>
+					)}
+
+					{show && (
+						<div
+							onClick={() => setShow(false)}
+							className="absolute top-1 right-1 "
+						>
+							<span
+								className="bg-red-600 text-white p-2 rounded text-lg cursor-pointer
+						
+						"
+							>
+								Switch Carema OFF
+							</span>
+						</div>
+					)}
+				</div>
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
 				{data?.length > 0 &&
