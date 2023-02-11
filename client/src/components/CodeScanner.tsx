@@ -32,6 +32,7 @@ function CodeScanner() {
 	const handleSubmit = () => {
 		console.log(input);
 		if (!input) return;
+
 		const item: Product[] = products.filter(
 			(product) => product?.uniq_id === input
 		);
@@ -60,6 +61,10 @@ function CodeScanner() {
 							torch={torchOn}
 							onUpdate={(err: any, result: any) => {
 								if (result) {
+									if (result.text === input) {
+										alert("This Medicine is already added");
+										return;
+									}
 									setInput(result.text);
 									setShow(false);
 								}
