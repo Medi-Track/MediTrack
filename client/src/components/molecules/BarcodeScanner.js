@@ -13,7 +13,7 @@ function BarcodeScanner({ onResult }) {
 						height: 320,
 						facingMode: "environment",
 					},
-					frequency: 0,
+					frequency: 1,
 
 					area: {
 						// defines rectangle of the detection/localization area

@@ -55,7 +55,7 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto bg-gray-200 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
+				<div className="flex mx-auto   bg-gray-200 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
 					{show ? (
 						<BarcodeScannerComponent
 							delay={1000}

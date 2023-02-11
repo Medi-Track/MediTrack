@@ -17,24 +17,34 @@ router.post("/create", async (req, res) => {
 		res.status(500).json(err);
 	}
 });
-//dec the quantity of the product
+//dec the quantity of the product not working properly
 router.put("/dec-medicines", async (req, res) => {
 	console.log("dec-medicines route");
 	const medicines = req.body;
 	if (!medicines) return res.status(400).json({ message: "No items found" });
 
+	let updatedProducts = [];
+
 	try {
 		// decrease the quantity of the product by item.stock
 		medicines.forEach(async (item) => {
-			const updatedProduct = await Product.findByIdAndUpdate(
-				item._id,
-				{
-					$dec: { stock: item.stock },
-				},
-				{ new: true }
-			);
+			try {
+				const updatedProduct = await Product.findByIdAndUpdate(
+					item._id,
+					{
+						$dec: { stock: item.stock },
+					},
+					{ new: true }
+				);
+				updatedProducts.push(updatedProduct);
+			} catch (err) {
+				res.status(500).send({ message: "Something went wrong" });
+				console.log(err);
+			}
 		});
-		res.status(201).json({ message: "Product has been Removed!" });
+		updatedProducts.length > 0
+			? res.status(201).send({ message: "Product has been Removed!" })
+			: res.status(400).send({ message: "Product not found" });
 	} catch (err) {
 		res.status(500).json({ message: "Something went wrong" });
 		console.log(err);
@@ -67,7 +77,7 @@ router.put("/inc-medicines", async (req, res) => {
 });
 
 //Update Products
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
 	console.log("update with id");
 	try {
 		const updatedProduct = await Product.findByIdAndUpdate(
