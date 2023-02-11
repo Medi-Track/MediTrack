@@ -12,7 +12,6 @@ import Login from "./pages/Login";
 import Layout from "./Layout/Layout";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import { MedicineStock } from "./pages/MedicineStock";
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/owned" element={<MedicineStock />} />
           </Routes>
         </Layout>
       </BrowserRouter>
