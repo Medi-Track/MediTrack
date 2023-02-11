@@ -23,7 +23,7 @@ const ScannedMedicine = () => {
 					</div>
 				))}
 
-			<div className="flex  justify-between max-w-md  items-center">
+			<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
 				<span>
 					<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
 						Add these medicines
