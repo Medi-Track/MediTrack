@@ -8,7 +8,7 @@ interface Props {
 	isCameraOpen: boolean;
 	setIsCameraOpen: (isCameraOpen: boolean) => void;
 	setIsOpen: (isOpen: boolean) => void;
-	data: Product[];
+	data: Product | undefined;
 }
 
 const ProductsModal = ({
@@ -62,9 +62,9 @@ const ProductsModal = ({
 									>
 										This Product is Scanned
 									</Dialog.Title>
-									{data.map((item) => (
+									{data && (
 										<div
-											key={item._id}
+											key={data._id}
 											className="mt-2 flex justify-between items-center"
 										>
 											<div
@@ -76,15 +76,15 @@ const ProductsModal = ({
 													className="flex flex-col space-y-1
                                         "
 												>
-													<span>{item.title}</span>
-													<span>{item.brand}</span>
+													<span>{data.title}</span>
+													<span>{data.brand}</span>
 												</div>
 											</div>
 											<div
 												className=" flex
                                          flex-col space-y-1"
 											>
-												<span>{item.price}</span>
+												<span>{data.price}</span>
 												<div className="flex items-center space-x-4">
 													<span
 														onClick={() =>
@@ -104,7 +104,7 @@ const ProductsModal = ({
 												</div>
 											</div>
 										</div>
-									))}
+									)}
 
 									<div className="mt-4 flex justify-between items-center">
 										<button

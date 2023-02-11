@@ -14,7 +14,7 @@ import ProductsModal from "./ProductsModal";
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
 
-	const [data, setData] = useState<Product[]>([]);
+	const [data, setData] = useState<Product>();
 	const [input, setInput] = useState<string>("");
 
 	const [torchOn, setTorchOn] = useState(false);
@@ -33,12 +33,13 @@ function CodeScanner() {
 		console.log(input);
 		if (!input) return;
 
-		const item: Product[] = products.filter(
+		const item: Product | undefined = products.find(
 			(product) => product?.uniq_id === input
 		);
-		if (item.length !== 0) {
+
+		if (item) {
 			alert("data found");
-			setData([...data, ...item]);
+			setData(item);
 			setShowProductModal(true);
 		} else {
 			alert("No Item Found");
@@ -101,12 +102,11 @@ function CodeScanner() {
 				</div>
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
-				{data?.length > 0 &&
-					data?.map((item) => (
-						<p className="text-white bg-red-400 " key={item._id}>
-							{item.title}
-						</p>
-					))}
+				{data && (
+					<p className="text-white bg-red-400 " key={data._id}>
+						{data.title}
+					</p>
+				)}
 
 				<button
 					className="  bg-red-400 "
