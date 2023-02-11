@@ -8,7 +8,7 @@ import {
 //types
 import { Product } from "../../types";
 
-const Item = ({ item }: any) => {
+const Item = ({ item, singleItem }: any) => {
 	// const [stock, setStock] = useState(1);
 	const dispatch = useDispatch();
 	return (

@@ -36,6 +36,27 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
+// aad the quantity of the product
+router.put("/add-medicines", async (req, res) => {
+	const { Items } = req.body;
+	try {
+		// increate the quantity of the product by item.stock
+		Items.forEach(async (item) => {
+			const updatedProduct = await Product.findByIdAndUpdate(
+				item._id,
+				{
+					$inc: { stock: item.stock },
+				},
+				{ new: true }
+			);
+		});
+		res.status(201).json({ message: "Product has been updated!" });
+	} catch (err) {
+		res.status(500).json({ message: "Something went wrong" });
+		console.log(err);
+	}
+});
+
 //Delete Products
 router.delete("/:id", async (req, res) => {
 	try {
