@@ -16,7 +16,19 @@ const ScannedMedicine = () => {
 		//axios call to add medicines to the database
 		try {
 			const { data } = await axios.put(
-				"http://localhost:5000/api/product/add-medicines",
+				"http://localhost:5000/api/product/inc-medicines",
+				medicines
+			);
+			console.log("data", data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const removeMedicines = async (medicines: Product[]) => {
+		//axios call to add medicines to the database
+		try {
+			const { data } = await axios.put(
+				"http://localhost:5000/api/product/dec-medicines",
 				medicines
 			);
 			console.log("data", data);
@@ -39,7 +51,12 @@ const ScannedMedicine = () => {
 
 			<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
 				<span>
-					<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+					<button
+						onClick={() => {
+							removeMedicines(medicines);
+						}}
+						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+					>
 						Remove these medicines
 					</button>
 				</span>

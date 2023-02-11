@@ -17,9 +17,58 @@ router.post("/create", async (req, res) => {
 		res.status(500).json(err);
 	}
 });
+//dec the quantity of the product
+router.put("/dec-medicines", async (req, res) => {
+	console.log("dec-medicines route");
+	const medicines = req.body;
+	if (!medicines) return res.status(400).json({ message: "No items found" });
+
+	try {
+		// decrease the quantity of the product by item.stock
+		medicines.forEach(async (item) => {
+			const updatedProduct = await Product.findByIdAndUpdate(
+				item._id,
+				{
+					$dec: { stock: item.stock },
+				},
+				{ new: true }
+			);
+		});
+		res.status(201).json({ message: "Product has been Removed!" });
+	} catch (err) {
+		res.status(500).json({ message: "Something went wrong" });
+		console.log(err);
+	}
+});
+
+// aad the quantity of the product
+router.put("/inc-medicines", async (req, res) => {
+	console.log("inc-medicines route");
+
+	const medicines = req.body;
+	if (!medicines) return res.status(400).json({ message: "No items found" });
+
+	try {
+		// increate the quantity of the product by item.stock
+		medicines.forEach(async (item) => {
+			const updatedProduct = await Product.findByIdAndUpdate(
+				item._id,
+				{
+					$inc: { stock: item.stock },
+				},
+				{ new: true }
+			);
+		});
+		res.status(201).json({ message: "Product has been Added!" });
+	} catch (err) {
+		res.status(500).json({ message: "Something went wrong" });
+		console.log(err);
+	}
+});
 
 //Update Products
 router.put("/:id", async (req, res) => {
+	console.log("update with id");
 	try {
 		const updatedProduct = await Product.findByIdAndUpdate(
 			req.params.id,
@@ -30,27 +79,6 @@ router.put("/:id", async (req, res) => {
 		);
 
 		res.status(201).json(updatedProduct);
-	} catch (err) {
-		res.status(500).json({ message: "Something went wrong" });
-		console.log(err);
-	}
-});
-
-// aad the quantity of the product
-router.put("/add-medicines", async (req, res) => {
-	const { Items } = req.body;
-	try {
-		// increate the quantity of the product by item.stock
-		Items.forEach(async (item) => {
-			const updatedProduct = await Product.findByIdAndUpdate(
-				item._id,
-				{
-					$inc: { stock: item.stock },
-				},
-				{ new: true }
-			);
-		});
-		res.status(201).json({ message: "Product has been updated!" });
 	} catch (err) {
 		res.status(500).json({ message: "Something went wrong" });
 		console.log(err);
