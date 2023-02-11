@@ -9,6 +9,7 @@ import { Product } from "../types";
 import BarcodeScanner from "./molecules/BarcodeScanner";
 
 import { CiCamera } from "react-icons/ci";
+import ProductsModal from "./ProductsModal";
 
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
@@ -18,6 +19,8 @@ function CodeScanner() {
 
 	const [torchOn, setTorchOn] = useState(false);
 	const [show, setShow] = useState(false);
+
+	const [showProductModal, setShowProductModal] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!products) {
@@ -34,6 +37,7 @@ function CodeScanner() {
 		if (item.length !== 0) {
 			alert("data found");
 			setData([...data, ...item]);
+			setShowProductModal(true);
 		} else {
 			alert("No Item Found");
 		}
@@ -56,6 +60,7 @@ function CodeScanner() {
 							onUpdate={(err: any, result: any) => {
 								if (result) {
 									setInput(result.text);
+									setShow(false);
 								}
 								if (err) {
 									// console.log(err);
@@ -106,7 +111,7 @@ function CodeScanner() {
 				<button className="bg-blue-400" onClick={() => setShow(!show)}>
 					Switch Carema {show ? "Off" : "On"}
 				</button>
-				<div>
+				{/* <div>
 					<form>
 						<input
 							className="p-2 border-2 border-gray-300 rounded-lg"
@@ -116,8 +121,13 @@ function CodeScanner() {
 						/>
 						<button className="p-2 bg-red-400">Submit</button>
 					</form>
-				</div>
+				</div> */}
 			</div>
+			<ProductsModal
+				isOpen={showProductModal}
+				setIsOpen={setShowProductModal}
+				data={data}
+			/>
 		</>
 	);
 }
