@@ -31,6 +31,7 @@ function CodeScanner() {
 
 	const handleSubmit = () => {
 		console.log(input);
+		if (!input) return;
 		const item: Product[] = products.filter(
 			(product) => product?.uniq_id === input
 		);
@@ -111,22 +112,13 @@ function CodeScanner() {
 				<button className="bg-blue-400" onClick={() => setShow(!show)}>
 					Switch Carema {show ? "Off" : "On"}
 				</button>
-				{/* <div>
-					<form>
-						<input
-							className="p-2 border-2 border-gray-300 rounded-lg"
-							value={input}
-							onChange={(e) => setInput(e.target.value)}
-							type="text"
-						/>
-						<button className="p-2 bg-red-400">Submit</button>
-					</form>
-				</div> */}
 			</div>
 			<ProductsModal
 				isOpen={showProductModal}
 				setIsOpen={setShowProductModal}
 				data={data}
+				isCameraOpen={show}
+				setIsCameraOpen={setShow}
 			/>
 		</>
 	);

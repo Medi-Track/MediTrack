@@ -5,15 +5,27 @@ import { Product } from "../types";
 
 interface Props {
 	isOpen: boolean;
+	isCameraOpen: boolean;
+	setIsCameraOpen: (isCameraOpen: boolean) => void;
 	setIsOpen: (isOpen: boolean) => void;
 	data: Product[];
 }
 
-const ProductsModal = ({ isOpen, setIsOpen, data }: Props) => {
+const ProductsModal = ({
+	isOpen,
+	setIsOpen,
+	data,
+	isCameraOpen,
+	setIsCameraOpen,
+}: Props) => {
 	const [stock, setStock] = useState(1);
 
 	function closeModal() {
 		setIsOpen(false);
+	}
+
+	function openCamera() {
+		setIsCameraOpen(true);
 	}
 
 	return (
@@ -50,57 +62,68 @@ const ProductsModal = ({ isOpen, setIsOpen, data }: Props) => {
 									>
 										This Product is Scanned
 									</Dialog.Title>
-									<div className="mt-2 flex justify-between items-center">
+									{data.map((item) => (
 										<div
-											className="items-center flex
-                                         space-x-1 "
+											key={item._id}
+											className="mt-2 flex justify-between items-center"
 										>
-											<span className="p-6 rounded-full bg-gray-400 "></span>
 											<div
-												className="flex flex-col space-y-1
-                                        "
+												className="items-center flex
+                                         space-x-1 "
 											>
-												<span>Tittle</span>
-												<span>Brand</span>
+												<span className="p-6 rounded-full bg-gray-400 "></span>
+												<div
+													className="flex flex-col space-y-1
+                                        "
+												>
+													<span>{item.title}</span>
+													<span>{item.brand}</span>
+												</div>
 											</div>
-										</div>
-										<div
-											className=" flex
+											<div
+												className=" flex
                                          flex-col space-y-1"
-										>
-											<span>$12</span>
-											<div className="flex items-center space-x-4">
-												<span
-													onClick={() =>
-														stock > 0 && setStock(stock - 1)
-													}
-													className=" cursor-pointer px-2 text-2xl py-1 border-[2px] border-gray-200"
-												>
-													-
-												</span>
-												<span>{stock}</span>
-												<span
-													onClick={() => setStock(stock + 1)}
-													className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
-												>
-													+
-												</span>
+											>
+												<span>{item.price}</span>
+												<div className="flex items-center space-x-4">
+													<span
+														onClick={() =>
+															stock > 0 && setStock(stock - 1)
+														}
+														className=" cursor-pointer px-2 text-2xl py-1 border-[2px] border-gray-200"
+													>
+														-
+													</span>
+													<span>{stock}</span>
+													<span
+														onClick={() => setStock(stock + 1)}
+														className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
+													>
+														+
+													</span>
+												</div>
 											</div>
 										</div>
-									</div>
+									))}
 
 									<div className="mt-4 flex justify-between items-center">
 										<button
 											type="button"
 											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-											onClick={closeModal}
+											onClick={() => {
+												closeModal();
+												openCamera();
+											}}
 										>
 											Scan Again
 										</button>
 										<button
 											type="button"
 											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-											onClick={closeModal}
+											onClick={() => {
+												closeModal();
+												openCamera();
+											}}
 										>
 											Scan Next Product
 										</button>
