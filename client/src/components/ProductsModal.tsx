@@ -30,9 +30,8 @@ const ProductsModal = ({
 	const ScannedMedicines: Product[] = useSelector(
 		(state: RootState) => state.scannedProduct.medicine
 	);
-	const [alreadyScannedData, setAlreadyScannedData] = useState<Product>(
-		{} as Product
-	);
+	const [alreadyScannedData, setAlreadyScannedData] = useState<Product>();
+
 	const [stock, setStock] = useState<number>(1);
 
 	function closeModal() {
@@ -51,6 +50,7 @@ const ProductsModal = ({
 
 	useEffect(() => {
 		if (data) {
+			console.log("data", data);
 			const item: Product | undefined = ScannedMedicines.find(
 				(product) => product?._id === data?._id
 			);

@@ -12,34 +12,33 @@ const Item = ({ item, singleItem }: any) => {
 	const dispatch = useDispatch();
 	console.log(item, "item");
 	return (
-		<span>item</span>
-		// <li
-		// 	key={item._id}
-		// 	className="p-2 w-full border-t grid gap-8 grid-cols-[3fr_3fr_1fr_0.5fr_1fr_1fr] items-center"
-		// >
-		// 	<div className="text-left">{item.title}</div>
-		// 	<div className="text-left flex items-center">
-		// 		<span
-		// 			onClick={() => {
-		// 				item.stock > 0 && dispatch(decreaseQuantity(item));
-		// 			}}
-		// 			className=" p-2 rounded-sm h-fit border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
-		// 		>
-		// 			-
-		// 		</span>
-		// 		<span> {item.stock}</span>
-		// 		<span
-		// 			onClick={() => dispatch(increaseQuantity(item))}
-		// 			className="p-2 rounded-sm h-fit border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
-		// 		>
-		// 			+
-		// 		</span>
-		// 	</div>
-		// 	<div className="text-right">₹{item.price}</div>
-		// 	<button className="rounded m-l-6 p-1 cursor-default bg-cyan-400 hover:text-cyan-400">
-		// 		₹{item.stock * item.price}
-		// 	</button>
-		// </li>
+		<li
+			key={item?._id}
+			className="p-2 w-full border-t grid gap-8 grid-cols-[3fr_3fr_1fr_0.5fr_1fr_1fr] items-center"
+		>
+			<div className="text-left">{item?.title}</div>
+			<div className="text-left flex items-center">
+				<span
+					onClick={() => {
+						item?.stock > 0 && dispatch(decreaseQuantity(item));
+					}}
+					className=" p-2 rounded-sm h-fit border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
+				>
+					-
+				</span>
+				<span> {item?.stock}</span>
+				<span
+					onClick={() => dispatch(increaseQuantity(item))}
+					className="p-2 rounded-sm h-fit border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
+				>
+					+
+				</span>
+			</div>
+			<div className="text-right">₹{item?.price}</div>
+			<button className="rounded m-l-6 p-1 cursor-default bg-cyan-400 hover:text-cyan-400">
+				₹{item?.stock * item?.price}
+			</button>
+		</li>
 
 		// 		<div key={item?._id} className="mt-2 flex justify-between items-center">
 		// 			<div
