@@ -14,6 +14,7 @@ import ProductsModal from "./ProductsModal";
 
 // types
 import { Product } from "../types";
+import { toast } from "react-hot-toast";
 
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
@@ -38,11 +39,10 @@ function CodeScanner() {
 			(product) => product?.uniq_id === input
 		);
 		if (item) {
-			alert("data found");
 			setData(item);
 			setShowProductModal(true);
 		} else {
-			alert("No Item Found");
+			toast.error("Product not found with this code" + input);
 		}
 	};
 

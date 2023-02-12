@@ -35,9 +35,12 @@ const ProductsModal = ({
 	);
 
 	const [stock, setStock] = useState<number>(1);
+	const [alreadyScanned, setAlreadyScanned] = useState<boolean>(false);
 
 	function closeModal() {
 		setIsOpen(false);
+		setStock(1);
+		setAlreadyScanned(false);
 	}
 	function openCamera() {
 		setIsCameraOpen(true);
@@ -57,6 +60,7 @@ const ProductsModal = ({
 				(product) => product?._id === data?._id
 			);
 			if (item) {
+				setAlreadyScanned(true);
 				setAlreadyScannedData(item);
 				console.log("already scanned", item);
 			}
@@ -110,6 +114,8 @@ const ProductsModal = ({
 
 														if (alreadyScannedData) {
 															closeModal();
+															setStock(1);
+															setAlreadyScanned(false);
 														} else {
 															dispatch(
 																addScannedProduct({
@@ -119,6 +125,7 @@ const ProductsModal = ({
 															);
 															closeModal();
 															setStock(1);
+															setAlreadyScanned(false);
 														}
 													}}
 												>
@@ -128,7 +135,12 @@ const ProductsModal = ({
 										</div>
 									</Dialog.Title>
 									{data && alreadyScannedData ? (
-										<Item item={alreadyScannedData} />
+										<Item
+											item={alreadyScannedData}
+											stock={stock}
+											setStock={setStock}
+											alreadyScanned={alreadyScanned}
+										/>
 									) : (
 										data && (
 											<ScannedItem
@@ -147,6 +159,7 @@ const ProductsModal = ({
 												closeModal();
 												openCamera();
 												setStock(1);
+												setAlreadyScanned(false);
 											}}
 										>
 											Scan Again
@@ -158,8 +171,11 @@ const ProductsModal = ({
 												if (alreadyScannedData) {
 													closeModal();
 													openCamera();
+													setStock(1);
+													setAlreadyScanned(false);
 												} else {
 													handleDispatch();
+													setAlreadyScanned(false);
 												}
 											}}
 										>
