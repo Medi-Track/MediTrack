@@ -55,31 +55,44 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto   bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px]  items-center">
-					<div className=" mb-4 ">
-						<Switch
-							checked={show}
-							onChange={setShow}
-							className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
-          relative inline-flex h-[18px] w-[40px] shrink-0  cursor-pointer rounded-full
+				<div className=" mx-auto  flex flex-col justify-center  bg-opacity-50   w-full max-w-[500px]  items-center">
+					<div className=" mb-4 flex flex-col items-center justify-center ">
+						<div className="">
+							<span
+								className=" cursor-pointer text-cyan-400 hover:to-cyan-700 "
+								onClick={() => setShow(!show)}
+							>
+								<CiCamera className=" text-6xl " />
+							</span>
+						</div>
+
+						<div className="flex space-x-4">
+							<span>OFF</span>
+							<Switch
+								checked={show}
+								onChange={setShow}
+								className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
+          relative inline-flex h-[24px] w-[50px] shrink-0  cursor-pointer rounded-full
 		   border-2 border-transparent transition-colors duration-200 ease-in-out
 		    focus:outline-none focus-visible:ring-2
 			  focus-visible:ring-white focus-visible:ring-opacity-75`}
-						>
-							{/* <span className="sr-only">Use setting</span> */}
-							<span
-								aria-hidden="true"
-								className={`${
-									show ? "translate-x-[23px]" : "translate-x-0"
-								}
-            pointer-events-none inline-block h-[15px] w-[15px] transform 
+							>
+								{/* <span className="sr-only">Use setting</span> */}
+								<span
+									aria-hidden="true"
+									className={`${
+										show ? "translate-x-[28px]" : "translate-x-0"
+									}
+            pointer-events-none inline-block h-[20px] w-[20px] transform 
 			rounded-full bg-white shadow-lg ring-0 transition
 			 duration-200 ease-in-out`}
-							/>
-						</Switch>
+								/>
+							</Switch>
+							<span>ON</span>
+						</div>
 					</div>
 
-					{show ? (
+					{show && (
 						<BarcodeScannerComponent
 							delay={1000}
 							torch={torchOn}
@@ -92,15 +105,6 @@ function CodeScanner() {
 								}
 							}}
 						/>
-					) : (
-						<div className="">
-							<span
-								className=" cursor-pointer text-cyan-400 hover:to-cyan-700 "
-								onClick={() => setShow(!show)}
-							>
-								<CiCamera className=" text-7xl " />
-							</span>
-						</div>
 					)}
 				</div>
 
