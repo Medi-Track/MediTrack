@@ -16,21 +16,21 @@ const Item = ({ item, singleItem }: any) => {
 			className="p-2 border-t grid gap-8 grid-cols-[3fr_1fr_1fr_0.5fr_1fr_1fr] items-center"
 		>
 			<div className="text-left">{item.title}</div>
-			<div className="text-left">
+			<div className="text-left flex items-center">
 				<span
 					onClick={() => {
 						item.stock > 0 && dispatch(decreaseQuantity(item));
 						console.log("stock", item.stock);
 						console.log("id", item._id);
 					}}
-					className=" cursor-pointer px-2 text-2xl py-1 border-[2px] border-gray-200"
+					className=" p-2 rounded-sm border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
 				>
 					-
 				</span>
 				<span> {item.stock}</span>
 				<span
 					onClick={() => dispatch(increaseQuantity(item))}
-					className="px-2 cursor-pointer text-2xl py-1  border-[2px] border-gray-200"
+					className="p-2 rounded-sm border-cyan-200 hover:bg-cyan-200 cursor-pointer text-2xl"
 				>
 					+
 				</span>
