@@ -6,5 +6,6 @@ export interface Product {
 	price: number;
 	brand: string;
 	uniq_id: string;
+	expiring_date: string;
 	stock: number;
 }
