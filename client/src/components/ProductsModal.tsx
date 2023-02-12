@@ -91,6 +91,7 @@ const ProductsModal = ({
 															})
 														);
 														closeModal();
+														setStock(1);
 													}}
 												>
 													Done
