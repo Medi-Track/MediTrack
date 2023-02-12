@@ -32,7 +32,6 @@ function CodeScanner() {
 	}, []);
 
 	const handleSubmit = (input: string) => {
-		console.log(input);
 		if (!input) return;
 		setShow(false);
 		const item: Product | undefined = products.find(
@@ -56,8 +55,8 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto  relative bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px]  items-center">
-					<div className="absolute top-0 ">
+				<div className="flex mx-auto   bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px]  items-center">
+					<div className=" mb-4 ">
 						<Switch
 							checked={show}
 							onChange={setShow}

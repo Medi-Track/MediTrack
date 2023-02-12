@@ -30,7 +30,9 @@ const ProductsModal = ({
 	const ScannedMedicines: Product[] = useSelector(
 		(state: RootState) => state.scannedProduct.medicine
 	);
-	const [alreadyScannedData, setAlreadyScannedData] = useState<Product>();
+	const [alreadyScannedData, setAlreadyScannedData] = useState<Product | null>(
+		null
+	);
 
 	const [stock, setStock] = useState<number>(1);
 
