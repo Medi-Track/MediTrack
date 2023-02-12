@@ -13,6 +13,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { twMerge } from "tailwind-merge";
 import Input from "../components/input.component";
+import { FaRegUser } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+import { AiOutlineMessage } from "react-icons/ai";
 
 const schema = yup.object().shape({
   username: yup.string().required(),
@@ -136,6 +139,7 @@ const ContactUs = () => {
           >
             <div className="flex flex-col gap-8 body">
               <Input
+                Icon={FaRegUser}
                 register={register}
                 type="text"
                 name="username"
@@ -143,6 +147,7 @@ const ContactUs = () => {
                 errorMessage={errors.username?.message as string}
               />
               <Input
+                Icon={HiOutlineMail}
                 register={register}
                 type="text"
                 name="email"
@@ -150,6 +155,7 @@ const ContactUs = () => {
                 errorMessage={errors.email?.message as string}
               />
               <Input
+                Icon={AiOutlineMessage}
                 register={register}
                 type="text"
                 name="message"

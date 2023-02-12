@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { BsFillPhoneFill, BsKeyboard } from "react-icons/bs";
 import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -11,6 +11,7 @@ interface PROPS_INTERFACE {
   name: string;
   placeholder: string;
   rows?: number;
+  Icon: React.ElementType;
 }
 
 const Input: React.FC<PROPS_INTERFACE> = ({
@@ -20,34 +21,8 @@ const Input: React.FC<PROPS_INTERFACE> = ({
   errorMessage,
   placeholder,
   rows,
+  Icon,
 }) => {
-  let icon = (
-      <BsKeyboard className="text-[color:var(--color-primary)] text-xl  mx-1" />
-    ),
-    message = "Enter details correctly";
-
-  if (name.toLowerCase() === "username") {
-    icon = (
-      <FaRegUser className="text-[color:var(--color-primary)]  mx-1 text-md" />
-    );
-    message = "Username must not be empty.";
-  } else if (name.includes("email")) {
-    icon = (
-      <FaRegEnvelope className="text-[color:var(--color-primary)] text-lg  mx-1" />
-    );
-    message = "Please enter a valid email.";
-  } else if (name.toLowerCase() === "message") {
-    icon = (
-      <AiOutlineMessage className="text-[color:var(--color-primary)]  mx-1 text-xl" />
-    );
-    message = "OTP must not be empty.";
-  } else if (name.toLowerCase().includes("phone")) {
-    icon = (
-      <BsFillPhoneFill className="text-[color:var(--color-primary)]  mx-1 text-xl" />
-    );
-    message = "Phone number must not be empty.";
-  }
-
   const isError = errorMessage !== undefined;
   if (rows) {
     return (
@@ -57,7 +32,7 @@ const Input: React.FC<PROPS_INTERFACE> = ({
             `flex items-centerpx-2 pl-2 py-3 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)]`
           )}
         >
-            {icon}
+          <Icon className="text-[color:var(--color-primary)]  mx-1 text-md" />
           <textarea
             name={name}
             className={twMerge(
@@ -84,7 +59,7 @@ const Input: React.FC<PROPS_INTERFACE> = ({
           `flex items-center px-2 py-2.5 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)]`
         )}
       >
-        {icon}
+        <Icon className="text-[color:var(--color-primary)]  mx-1 text-md" />
         <input
           name={name}
           className={twMerge(

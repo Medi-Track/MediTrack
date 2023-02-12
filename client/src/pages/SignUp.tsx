@@ -3,8 +3,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../components/input.component";
+import { FaRegUser } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+import { CgPassword } from "react-icons/cg";
 
 const schema = yup.object().shape({
+  username: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().required(),
 });
@@ -36,6 +40,7 @@ const SignUp = () => {
 
         <div className="flex flex-col gap-4 mt-8">
           <Input
+            Icon={FaRegUser}
             register={register}
             type="text"
             name="username"
@@ -43,6 +48,7 @@ const SignUp = () => {
             errorMessage={errors.email?.message as string}
           />
           <Input
+            Icon={HiOutlineMail}
             register={register}
             type="text"
             name="email"
@@ -51,6 +57,7 @@ const SignUp = () => {
           />
 
           <Input
+            Icon={CgPassword}
             register={register}
             type="password"
             name="password"

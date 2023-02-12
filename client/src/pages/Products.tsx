@@ -11,7 +11,6 @@ import { Product } from "../types";
 
 const Products = () => {
 	const products = useSelector((state: RootState) => state.product.items);
-
 	const dispatch = useDispatch();
 	const getProducts = async () => {
 		try {
