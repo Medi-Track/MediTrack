@@ -21,10 +21,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/product" element={<Products />} />
-						<Route
-							path="/scanned-medicine"
-							element={<ScannedMedicine />}
-						/>
+
 						<Route
 							path="/scanned-medicine"
 							element={<ScannedMedicine />}
