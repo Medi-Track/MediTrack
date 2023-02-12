@@ -10,7 +10,7 @@ import { Product } from "../../types";
 
 const Item = ({ item, singleItem }: any) => {
 	const dispatch = useDispatch();
-	console.log(item, "item");
+	console.log("item aitem present");
 	return (
 		<li
 			key={item?._id}

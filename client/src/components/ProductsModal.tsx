@@ -104,7 +104,6 @@ const ProductsModal = ({
 
 														if (alreadyScannedData) {
 															closeModal();
-															setStock(1);
 														} else {
 															dispatch(
 																addScannedProduct({
@@ -153,7 +152,6 @@ const ProductsModal = ({
 												if (alreadyScannedData) {
 													closeModal();
 													openCamera();
-													setStock(1);
 												} else {
 													handleDispatch();
 												}
