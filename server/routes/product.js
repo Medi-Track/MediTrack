@@ -17,6 +17,7 @@ router.post("/create", async (req, res) => {
 		res.status(500).json(err);
 	}
 });
+
 //dec the quantity of the product not working properly
 router.put("/dec-medicines", async (req, res) => {
 	console.log("dec-medicines route");
