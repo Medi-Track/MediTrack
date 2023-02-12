@@ -37,7 +37,7 @@ const Products = () => {
 
 
     const handleEdit = (id: Product["_id"]) => {
-        navigate(`/medicine/stocks/edit/${id}`);
+        navigate(`/update-medicine/${id}`);
     }
 
 
@@ -57,7 +57,7 @@ const Products = () => {
     return (
         <div>
             <ul className='border-b'>
-                <li className='p-2 grid gap-8 grid-cols-[3fr_1fr_1fr_0.5fr_1fr_1fr]'>
+                <li className='p-2 grid gap-12 grid-cols-[3fr_1fr_1fr_0.25fr_0.25fr_0.25fr]'>
                     <div className='flex items-center font-bold'>
                         <p>Title</p>
                     </div>
