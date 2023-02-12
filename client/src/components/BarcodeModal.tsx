@@ -48,20 +48,20 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 								leaveFrom="opacity-100 scale-100"
 								leaveTo="opacity-0 scale-95"
 							>
-								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-									<Dialog.Title
+								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded bg-white p-6 text-left align-middle shadow-xl transition-all">
+									{/* <Dialog.Title
 										as="h3"
 										className="text-lg font-medium leading-6 text-gray-900"
 									>
 										{title}
-									</Dialog.Title>
+									</Dialog.Title> */}
 
 
-									<div className="mt-2" ref={barcodeRef}>
-										<Barcode displayValue={false} value={uniq_id} />
+									<div className="mt-2 flex justify-center" ref={barcodeRef}>
+										<Barcode width={3} height={150} displayValue={false} value={uniq_id} />
 									</div>
 
-									<div className="mt-4 flex items-center justify-between">
+									<div className="mt-8 flex items-center justify-between">
 										<button
 											className="text-3xl"
 											onClick={() => exportAsImage(barcodeRef.current, `${title}${Date.now()}.png`)}
