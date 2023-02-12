@@ -7,6 +7,8 @@ import { addProduct } from "../redux/slice/productSlice";
 import type { RootState } from "../redux/store";
 // components
 import CodeScanner from "../components/CodeScanner";
+import ScannedItem from "../components/molecules/scanpage/ScannedItem";
+import ScannedMedicine from "./ScannedMedicine";
 // const socket = io("http://localhost:5000");
 
 const Home = () => {
@@ -32,6 +34,7 @@ const Home = () => {
 	return (
 		<div>
 			<CodeScanner />
+			<ScannedMedicine />
 		</div>
 	);
 };

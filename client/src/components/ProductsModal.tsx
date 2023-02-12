@@ -55,21 +55,21 @@ const ProductsModal = ({
 
 	useEffect(() => {
 		if (data && isOpen) {
-			console.log("data", data);
+			// console.log("data", data);
 			const item: Product | undefined = ScannedMedicines.find(
 				(product) => product?._id === data?._id
 			);
 			if (item) {
 				setAlreadyScanned(true);
 				setAlreadyScannedData(item);
-				console.log("already scanned", item);
+				// console.log("already scanned", item);
 			}
 		}
 	}, [isOpen]);
 
-	useEffect(() => {
-		console.log("alreadyScannedData=>", alreadyScannedData);
-	}, [alreadyScannedData]);
+	// useEffect(() => {
+	// 	// console.log("alreadyScannedData=>", alreadyScannedData);
+	// }, [alreadyScannedData]);
 
 	return (
 		<div>

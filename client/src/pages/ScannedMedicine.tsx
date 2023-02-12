@@ -81,28 +81,34 @@ const ScannedMedicine = () => {
 					</div>
 				))} */}
 
-			<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
-				<span>
-					<button
-						onClick={() => {
-							removeMedicines(medicines);
-						}}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-					>
-						Remove these medicines
-					</button>
-				</span>
-				<span>
-					<button
-						onClick={() => {
-							addMedicines(medicines);
-						}}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-					>
-						Add these medicines
-					</button>
-				</span>
-			</div>
+			{medicines.length > 0 ? (
+				<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
+					<span>
+						<button
+							onClick={() => {
+								removeMedicines(medicines);
+							}}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						>
+							Remove these medicines
+						</button>
+					</span>
+					<span>
+						<button
+							onClick={() => {
+								addMedicines(medicines);
+							}}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						>
+							Add these medicines
+						</button>
+					</span>
+				</div>
+			) : (
+				<div className="flex justify-center items-center ">
+					<span>Please Scan Item :"("</span>
+				</div>
+			)}
 		</div>
 	);
 };
