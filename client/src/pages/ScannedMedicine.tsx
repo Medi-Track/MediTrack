@@ -105,8 +105,9 @@ const ScannedMedicine = () => {
 					</span>
 				</div>
 			) : (
-				<div className="flex justify-center items-center ">
-					<span>Please Scan Item :"("</span>
+				<div className="flex mt-4 flex-col justify-center items-center ">
+					<span className="text-xl ">No Item Scanned</span>
+					<span className="text-sm text-gray-300">Please Scan Item</span>
 				</div>
 			)}
 		</div>

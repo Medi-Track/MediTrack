@@ -111,12 +111,12 @@ function CodeScanner() {
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
 				<div
-					className="mt-8 w-full 
+					className="mt-2 w-full 
 				"
 				>
 					{show && (
 						<button
-							className="  px-3 text-lg text-white bg-cyan-700 "
+							className="  px-3 py-2 text-lg rounded-lg text-white bg-cyan-700 "
 							onClick={() => setTorchOn(!torchOn)}
 						>
 							Switch Torch {torchOn ? "Off" : "On"}
