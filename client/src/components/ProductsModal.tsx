@@ -49,7 +49,7 @@ const ProductsModal = ({
 	};
 
 	useEffect(() => {
-		if (data) {
+		if (data && isOpen) {
 			console.log("data", data);
 			const item: Product | undefined = ScannedMedicines.find(
 				(product) => product?._id === data?._id
@@ -59,7 +59,7 @@ const ProductsModal = ({
 				console.log("already scanned", item);
 			}
 		}
-	}, []);
+	}, [isOpen]);
 
 	return (
 		<div>
