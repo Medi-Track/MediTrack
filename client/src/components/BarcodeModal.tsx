@@ -1,6 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Barcode from "react-barcode";
+import { BiDownload } from 'react-icons/bi'
+import exportAsImage from "../utils/exportAsImage";
+
 
 interface Props {
 	isOpen: boolean;
@@ -13,6 +16,10 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 	function closeModal() {
 		setIsOpen(false);
 	}
+
+
+	const barcodeRef = useRef(null);
+
 
 	return (
 		<div>
@@ -48,11 +55,19 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 									>
 										{title}
 									</Dialog.Title>
-									<div className="mt-2">
+
+
+									<div className="mt-2" ref={barcodeRef}>
 										<Barcode displayValue={false} value={uniq_id} />
 									</div>
 
-									<div className="mt-4">
+									<div className="mt-4 flex items-center justify-between">
+										<button
+											className="text-3xl"
+											onClick={() => exportAsImage(barcodeRef.current, `${title}${Date.now()}.png`)}
+										>
+											<BiDownload />
+										</button>
 										<button
 											type="button"
 											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -60,6 +75,7 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 										>
 											Close
 										</button>
+
 									</div>
 								</Dialog.Panel>
 							</Transition.Child>
