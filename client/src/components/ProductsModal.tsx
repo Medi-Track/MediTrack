@@ -8,6 +8,7 @@ import { addScannedProduct } from "../redux/slice/scannedProductSlice";
 import { useDispatch } from "react-redux";
 // types
 import { Product } from "../types";
+import ScanedItem from "./molecules/scanpage/scanedItem";
 interface Props {
 	isOpen: boolean;
 	isCameraOpen: boolean;
@@ -24,6 +25,9 @@ const ProductsModal = ({
 	setIsCameraOpen,
 }: Props) => {
 	const dispatch = useDispatch();
+
+	const [stock, setStock] = useState<number>(1);
+
 	function closeModal() {
 		setIsOpen(false);
 	}
@@ -76,13 +80,13 @@ const ProductsModal = ({
 											<Link to="/scanned-medicine">
 												<button
 													type="button"
-													className="inline-flex mb-2 justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+													className="inline-flex mb-2 justify-center rounded-md border border-transparent hover:bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none "
 													onClick={() => {
 														if (!data) return;
 														dispatch(
 															addScannedProduct({
 																...data,
-																stock: 1,
+																stock: stock,
 															})
 														);
 														closeModal();
@@ -93,7 +97,13 @@ const ProductsModal = ({
 											</Link>
 										</div>
 									</Dialog.Title>
-									{data && <Item item={data} />}
+									{data && (
+										<ScanedItem
+											item={data}
+											stock={stock}
+											setStock={setStock}
+										/>
+									)}
 
 									<div className="mt-4 flex justify-between items-center">
 										<button
