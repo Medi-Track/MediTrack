@@ -56,6 +56,7 @@ const ProductsModal = ({
 			);
 			if (item) {
 				setAlreadyScannedData(item);
+				console.log("already scanned", item);
 			}
 		}
 	}, []);
