@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 // components
@@ -7,6 +7,7 @@ import ScannedItem from "./molecules/scanpage/ScannedItem";
 // redux
 import { addScannedProduct } from "../redux/slice/scannedProductSlice";
 import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 // types
 import { Product } from "../types";
 
@@ -26,6 +27,12 @@ const ProductsModal = ({
 	setIsCameraOpen,
 }: Props) => {
 	const dispatch = useDispatch();
+	const ScannedMedicines: Product[] = useSelector(
+		(state: RootState) => state.scannedProduct.medicine
+	);
+	const [alreadyScannedData, setAlreadyScannedData] = useState<Product>(
+		{} as Product
+	);
 	const [stock, setStock] = useState<number>(1);
 
 	function closeModal() {
@@ -41,6 +48,17 @@ const ProductsModal = ({
 		openCamera();
 		setStock(1);
 	};
+
+	useEffect(() => {
+		if (data) {
+			const item: Product | undefined = ScannedMedicines.find(
+				(product) => product?._id === data?._id
+			);
+			if (item) {
+				setAlreadyScannedData(item);
+			}
+		}
+	}, []);
 
 	return (
 		<div>
@@ -82,14 +100,20 @@ const ProductsModal = ({
 													className="inline-flex mb-2 justify-center rounded-md border border-transparent hover:bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none "
 													onClick={() => {
 														if (!data) return;
-														dispatch(
-															addScannedProduct({
-																...data,
-																stock: stock,
-															})
-														);
-														closeModal();
-														setStock(1);
+
+														if (alreadyScannedData) {
+															closeModal();
+															setStock(1);
+														} else {
+															dispatch(
+																addScannedProduct({
+																	...data,
+																	stock: stock,
+																})
+															);
+															closeModal();
+															setStock(1);
+														}
 													}}
 												>
 													Done
@@ -97,12 +121,16 @@ const ProductsModal = ({
 											</Link>
 										</div>
 									</Dialog.Title>
-									{data && (
-										<ScannedItem
-											item={data}
-											stock={stock}
-											setStock={setStock}
-										/>
+									{data && alreadyScannedData ? (
+										<Item data={alreadyScannedData} />
+									) : (
+										data && (
+											<ScannedItem
+												item={data}
+												stock={stock}
+												setStock={setStock}
+											/>
+										)
 									)}
 
 									<div className="mt-4 flex justify-between items-center">
@@ -121,7 +149,13 @@ const ProductsModal = ({
 											type="button"
 											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 											onClick={() => {
-												handleDispatch();
+												if (alreadyScannedData) {
+													closeModal();
+													openCamera();
+													setStock(1);
+												} else {
+													handleDispatch();
+												}
 											}}
 										>
 											Scan Next Product

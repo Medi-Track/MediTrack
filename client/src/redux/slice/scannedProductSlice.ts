@@ -39,6 +39,8 @@ export const scannedProductSlice = createSlice({
 			state.medicine = newBasket;
 		},
 
+		// return medicine with after searching with id
+
 		increaseQuantity: (
 			state: ScannedProductBasket,
 			action: PayloadAction<{ _id: string }>
