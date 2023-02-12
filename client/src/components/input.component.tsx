@@ -31,7 +31,7 @@ const Input: React.FC<PROPS_INTERFACE> = ({
       <FaRegUser className="text-[color:var(--color-primary)]  mx-1 text-md" />
     );
     message = "Username must not be empty.";
-  } else if (name.includes("Email")) {
+  } else if (name.includes("email")) {
     icon = (
       <FaRegEnvelope className="text-[color:var(--color-primary)] text-lg  mx-1" />
     );

@@ -20,7 +20,6 @@ const schema = yup.object().shape({
   message: yup.string().required(),
 });
 
-
 const ContactUs = () => {
   const {
     register,
@@ -28,8 +27,8 @@ const ContactUs = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const submitForm = (data:object) => {
-    console.log(data)
+  const submitForm = (data: object) => {
+    console.log(data);
   };
   return (
     <div className="mx-auto mt-28">
@@ -161,7 +160,10 @@ const ContactUs = () => {
             </div>
 
             <div className="flex justify-around mt-8 footer">
-              <button type="submit" className="px-4 py-2">
+              <button
+                type="submit"
+                className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white rounded-full font-semibold hover:bg-white hover:text-[color:var(--color-primary)]"
+              >
                 Submit
               </button>
             </div>
