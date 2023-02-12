@@ -9,6 +9,7 @@ import { BiRupee } from "react-icons/bi";
 import { BsCalendar2Date, BsCardImage, BsKeyboard } from "react-icons/bs";
 import { AiOutlineStock } from "react-icons/ai";
 import { TbListDetails } from "react-icons/tb";
+import { useParams } from "react-router-dom";
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -21,12 +22,18 @@ const schema = yup.object().shape({
 });
 
 const UpdateMedicine = () => {
+  const { id } = useParams();
+  
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  useEffect(()=>{
+    
+  })
 
   const submitForm = (data: object) => {
     console.log(data);
