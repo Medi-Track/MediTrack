@@ -3,12 +3,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 // components
 import Item from "./molecules/Item";
+import ScannedItem from "./molecules/scanpage/ScannedItem";
 // redux
 import { addScannedProduct } from "../redux/slice/scannedProductSlice";
 import { useDispatch } from "react-redux";
 // types
 import { Product } from "../types";
-import ScanedItem from "./molecules/scanpage/scanedItem";
+
 interface Props {
 	isOpen: boolean;
 	isCameraOpen: boolean;
@@ -98,7 +99,7 @@ const ProductsModal = ({
 										</div>
 									</Dialog.Title>
 									{data && (
-										<ScanedItem
+										<ScannedItem
 											item={data}
 											stock={stock}
 											setStock={setStock}
