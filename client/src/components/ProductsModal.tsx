@@ -128,7 +128,7 @@ const ProductsModal = ({
 										</div>
 									</Dialog.Title>
 									{data && alreadyScannedData ? (
-										<Item data={alreadyScannedData} />
+										<Item item={alreadyScannedData} />
 									) : (
 										data && (
 											<ScannedItem
