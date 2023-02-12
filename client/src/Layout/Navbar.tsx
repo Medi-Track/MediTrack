@@ -16,7 +16,9 @@ const Navbar = () => {
 				<div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
 					<div className="logo">
 						<h1 className="text-xl font-bold">
-							<span className="text-cyan-400">MediTrack</span>{" "}
+							<Link to="/">
+								<span className="text-cyan-400">MediTrack</span>{" "}
+							</Link>
 						</h1>
 					</div>
 
@@ -25,10 +27,10 @@ const Navbar = () => {
 						<div className="">
 							<ul className="flex gap-6 font-semibold lg:gap-8 text-md">
 								<Link
-									to="/"
+									to="/scan"
 									className="hover:text-[color:var(--color-primary)]"
 								>
-									Home
+									Scan
 								</Link>
 								<Link
 									to="/product"
@@ -85,11 +87,11 @@ const Navbar = () => {
 					<div className="">
 						<ul className="flex flex-col gap-4 text-lg font-semibold">
 							<Link
-								to="/"
+								to="/scan"
 								className="hover:text-[color:var(--color-primary)]"
 								onClick={dropMenuHandler}
 							>
-								Home
+								Scan
 							</Link>
 							<Link
 								to="/product"
