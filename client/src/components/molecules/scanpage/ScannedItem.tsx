@@ -7,9 +7,10 @@ interface Props {
 	item: Product;
 	stock: number;
 	setStock: (stock: number) => void;
+	fromModal: boolean;
 }
 
-const ScannedItem = ({ item, stock, setStock }: Props) => {
+const ScannedItem = ({ item, stock, setStock, fromModal }: Props) => {
 	const dispatch = useDispatch();
 	return (
 		<>
@@ -37,7 +38,7 @@ const ScannedItem = ({ item, stock, setStock }: Props) => {
 				</div>
 				<div className="text-right">₹{item.price}</div>
 				<button className="rounded m-l-6 p-1 cursor-default bg-cyan-400 hover:text-cyan-400">
-					₹{item.stock * item.price}
+					₹{fromModal ? stock * item?.price : item?.stock * item?.price}
 				</button>
 			</li>
 		</>

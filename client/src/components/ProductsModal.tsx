@@ -147,6 +147,7 @@ const ProductsModal = ({
 												item={data}
 												stock={stock}
 												setStock={setStock}
+												fromModal={true}
 											/>
 										)
 									)}

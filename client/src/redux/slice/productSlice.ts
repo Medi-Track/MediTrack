@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import type { Product } from "../../types";
+import { RootState } from "../store";
+import { toast } from "react-hot-toast";
 
 export interface ProductBasket {
 	items: Product[];
@@ -29,6 +31,7 @@ export const productSlice = createSlice({
 			if (index >= 0) {
 				newBasket.splice(index, 1);
 			} else {
+				toast.error("Can't remove product");
 				console.log("Can't remove product");
 			}
 			state.items = newBasket;

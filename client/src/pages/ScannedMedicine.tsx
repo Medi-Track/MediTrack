@@ -18,14 +18,15 @@ const ScannedMedicine = () => {
 		//axios call to add medicines to the database
 		try {
 			const { data } = await axios.put(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product/inc-medicines`,
+				`${process.env.REACT_APP_PORT_SERVER}/api/product/inc-medicines`,
 				medicines
 			);
 			// console.log("data", data);
-			toast.success(data.message);
+			toast.success("Medicines added");
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};
@@ -33,14 +34,16 @@ const ScannedMedicine = () => {
 		//axios call to add medicines to the database
 		try {
 			const { data } = await axios.put(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product/dec-medicines`,
+				`${process.env.REACT_APP_PORT_SERVER}/api/product/dec-medicines`,
 				medicines
 			);
 			// console.log("data", data);
-			toast.success(data.message);
+			// toast.success(data.message);
+			toast.success("Medicines removed");
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};

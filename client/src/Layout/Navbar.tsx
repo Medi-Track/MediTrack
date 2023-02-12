@@ -12,12 +12,13 @@ const Navbar = () => {
 
 	return (
 		<React.Fragment>
-			<nav className="fixed top-0 left-0  w-full p-4 bg-white border-2 shadow-md md:p-3 shadow-gray-300">
+			<nav className="fixed top-0 left-0  w-full px-4 pb-1 bg-white border-2 shadow-md md:p-3 shadow-gray-300">
 				<div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
 					<div className="logo">
 						<h1 className="text-xl font-bold">
-							<Link to="/">
-								<span className="text-cyan-400">MediTrack</span>{" "}
+							<Link className="flex items-center " to="/">
+								<img className="h-14" src="/logo.png" />
+								{/* <span className="text-cyan-400">MediTrack</span>{" "} */}
 							</Link>
 						</h1>
 					</div>
@@ -38,12 +39,12 @@ const Navbar = () => {
 								>
 									Product
 								</Link>
-								<Link
+								{/* <Link
 									to="/scanned-medicine"
 									className="hover:text-[color:var(--color-primary)]"
 								>
 									Scanned Medicine
-								</Link>
+								</Link> */}
 								{/* <Link
 									to="/aboutus"
 									className="hover:text-[color:var(--color-primary)]"
@@ -83,9 +84,16 @@ const Navbar = () => {
 				</div>
 			</nav>
 			{dropMenu && (
-				<div className="absolute left-0 z-10 flex flex-col items-center justify-center w-full gap-8 py-8 bg-white shadow-lg md:hidden top-12 shadow-gray-200">
+				<div className="absolute left-0 z-10 flex flex-col items-center justify-center w-full gap-8 py-8 bg-white shadow-lg md:hidden top-14 shadow-gray-200">
 					<div className="">
 						<ul className="flex flex-col gap-4 text-lg font-semibold">
+							<Link
+								to="/"
+								className="hover:text-[color:var(--color-primary)]"
+								onClick={dropMenuHandler}
+							>
+								Home
+							</Link>
 							<Link
 								to="/scan"
 								className="hover:text-[color:var(--color-primary)]"
@@ -100,12 +108,12 @@ const Navbar = () => {
 							>
 								Product
 							</Link>
-							<Link
+							{/* <Link
 								to="/scanned-medicine"
 								className="hover:text-[color:var(--color-primary)]"
 							>
 								Scanned Medicine
-							</Link>
+							</Link> */}
 							{/* <Link
 								to="/aboutus"
 								className="hover:text-[color:var(--color-primary)]"

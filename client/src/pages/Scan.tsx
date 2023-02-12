@@ -9,6 +9,7 @@ import type { RootState } from "../redux/store";
 import CodeScanner from "../components/CodeScanner";
 import ScannedItem from "../components/molecules/scanpage/ScannedItem";
 import ScannedMedicine from "./ScannedMedicine";
+import { toast } from "react-hot-toast";
 // const socket = io("http://localhost:5000");
 
 const Home = () => {
@@ -18,10 +19,11 @@ const Home = () => {
 	const getProducts = async () => {
 		try {
 			const { data } = await axios.get(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product`
+				`${process.env.REACT_APP_PORT_SERVER}/api/product`
 			);
 			dispatch(addProduct(data));
 		} catch (err) {
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};
