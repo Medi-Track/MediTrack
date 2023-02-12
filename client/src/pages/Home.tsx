@@ -22,7 +22,9 @@ const Home = () => {
 		}
 	};
 	useEffect(() => {
-		getProducts();
+		if (!products) {
+			getProducts();
+		}
 	}, []);
 	return (
 		<div>
