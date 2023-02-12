@@ -61,6 +61,10 @@ const ProductsModal = ({
 		}
 	}, [isOpen]);
 
+	useEffect(() => {
+		console.log("alreadyScannedData=>", alreadyScannedData);
+	}, [alreadyScannedData]);
+
 	return (
 		<div>
 			<Transition appear show={isOpen} as={Fragment}>
