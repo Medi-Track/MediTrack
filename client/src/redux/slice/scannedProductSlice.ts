@@ -47,8 +47,7 @@ export const scannedProductSlice = createSlice({
 				(items) => items._id === action.payload._id
 			);
 			let newBasket = [...state.medicine];
-			// console.log("index", index);
-			// console.log("newBasket", action.payload);
+
 			if (index >= 0) {
 				newBasket[index].stock++;
 			} else {

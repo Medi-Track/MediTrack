@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Toaster } from "react-hot-toast";
+// components
 import Home from "./pages/Home";
-
 import ScannedMedicine from "./pages/ScannedMedicine";
 import Scan from "./pages/Scan";
 import Products from "./pages/Products";
@@ -33,6 +33,7 @@ function App() {
 					</Routes>
 				</Layout>
 			</BrowserRouter>
+			<Toaster />
 		</div>
 	);
 }
