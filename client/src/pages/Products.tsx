@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 // import { FaTrashAlt } from 'react-icons/fa'
@@ -12,12 +13,15 @@ import { BiBarcodeReader } from 'react-icons/bi'
 import { FiSearch } from 'react-icons/fi'
 import Item from '../components/Item';
 import { demoData } from '../demoData';
+import { toast } from "react-hot-toast";
+
 
 const Products = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const products = useSelector((state: RootState) => state.product.items);
+
 
 	const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -33,6 +37,7 @@ const Products = () => {
 	const getProducts = async () => {
 		try {
 			const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/product`);
+
 			dispatch(addProduct(data));
 		} catch (err) {
 			console.log(err);
@@ -131,3 +136,4 @@ const Products = () => {
 
 
 export default Products;
+

@@ -18,7 +18,7 @@ router.post("/create", async (req, res) => {
 	}
 });
 
-//dec the quantity of the product not working properly
+//dec the quantity of the product
 router.put("/dec-medicines", async (req, res) => {
 	console.log("dec-medicines route");
 	const medicines = req.body;

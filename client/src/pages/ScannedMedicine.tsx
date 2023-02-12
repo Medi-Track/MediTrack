@@ -47,7 +47,31 @@ const ScannedMedicine = () => {
 
 	return (
 		<div>
-			{medicines?.length > 0 &&
+			<div>
+				<ul className="border-b">
+					<li className="p-2 grid gap-8 grid-cols-[3fr_1fr_1fr_0.5fr_1fr_1fr]">
+						<div className="font-bold flex items-center">
+							<p>Title</p>
+						</div>
+						<div className="font-bold flex items-center">
+							<p>Stock</p>
+						</div>
+
+						<div className="p-r-2 font-bold text-right">
+							<p className="text-right">Price</p>
+						</div>
+
+						<div className="p-r-2 font-bold text-right">
+							<p className="text-right">Total</p>
+						</div>
+					</li>
+					{medicines.map((medicine: Product) => {
+						return <Item key={medicine._id} item={medicine} />;
+					})}
+				</ul>
+			</div>
+
+			{/* {medicines?.length > 0 &&
 				medicines?.map((medicine) => (
 					<div
 						key={medicine._id}
@@ -55,30 +79,37 @@ const ScannedMedicine = () => {
 					>
 						<Item item={medicine} />
 					</div>
-				))}
+				))} */}
 
-			<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
-				<span>
-					<button
-						onClick={() => {
-							removeMedicines(medicines);
-						}}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-					>
-						Remove these medicines
-					</button>
-				</span>
-				<span>
-					<button
-						onClick={() => {
-							addMedicines(medicines);
-						}}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-					>
-						Add these medicines
-					</button>
-				</span>
-			</div>
+			{medicines.length > 0 ? (
+				<div className="flex mx-auto mt-4 justify-between max-w-md  items-center">
+					<span>
+						<button
+							onClick={() => {
+								removeMedicines(medicines);
+							}}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						>
+							Remove these medicines
+						</button>
+					</span>
+					<span>
+						<button
+							onClick={() => {
+								addMedicines(medicines);
+							}}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						>
+							Add these medicines
+						</button>
+					</span>
+				</div>
+			) : (
+				<div className="flex mt-4 flex-col justify-center items-center ">
+					<span className="text-xl ">No Item Scanned</span>
+					<span className="text-sm text-gray-300">Please Scan Item</span>
+				</div>
+			)}
 		</div>
 	);
 };

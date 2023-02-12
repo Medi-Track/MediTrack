@@ -7,6 +7,8 @@ import { addProduct } from "../redux/slice/productSlice";
 import type { RootState } from "../redux/store";
 // components
 import CodeScanner from "../components/CodeScanner";
+import ScannedItem from "../components/molecules/scanpage/ScannedItem";
+import ScannedMedicine from "./ScannedMedicine";
 // const socket = io("http://localhost:5000");
 
 const Home = () => {
@@ -15,20 +17,24 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const getProducts = async () => {
 		try {
-			const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/product`);
+			const { data } = await axios.get(
+				`http://localhost:${process.env.REACT_APP_PORT}/api/product`
+			);
 			dispatch(addProduct(data));
 		} catch (err) {
 			console.log(err);
 		}
 	};
 	useEffect(() => {
-		if (!products) {
+		if (products.length == 0) {
 			getProducts();
 		}
 	}, []);
+
 	return (
 		<div>
 			<CodeScanner />
+			<ScannedMedicine />
 		</div>
 	);
 };

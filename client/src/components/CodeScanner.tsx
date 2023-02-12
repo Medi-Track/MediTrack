@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import axios from "axios";
+import { Switch } from "@headlessui/react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+
 import { addProduct } from "../redux/slice/productSlice";
-import { Product } from "../types";
 import BarcodeScanner from "./molecules/BarcodeScanner";
 
 import { CiCamera } from "react-icons/ci";
 import ProductsModal from "./ProductsModal";
+
+// types
+import { Product } from "../types";
+import { toast } from "react-hot-toast";
 
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
@@ -17,107 +22,109 @@ function CodeScanner() {
 	const [data, setData] = useState<Product>();
 	const [input, setInput] = useState<string>("");
 
-	const [torchOn, setTorchOn] = useState(false);
-	const [show, setShow] = useState(false);
-
+	const [torchOn, setTorchOn] = useState<boolean>(false);
+	const [show, setShow] = useState<boolean>(false);
 	const [showProductModal, setShowProductModal] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!products) {
 			console.log("products", products);
 		}
-		console.log("data in use effect", data);
-	}, [data]);
+	}, []);
 
-	const handleSubmit = () => {
-		console.log(input);
+	const handleSubmit = (input: string) => {
 		if (!input) return;
-
+		setShow(false);
 		const item: Product | undefined = products.find(
 			(product) => product?.uniq_id === input
 		);
-
 		if (item) {
-			alert("data found");
 			setData(item);
 			setShowProductModal(true);
 		} else {
-			alert("No Item Found");
+			toast.error("Product not found with this code" + input);
 		}
 	};
 
-	useEffect(() => {
-		if (input) {
-			handleSubmit();
-		}
-	}, [input]);
+	// useEffect(() => {
+	// 	if (input) {
+	// 		handleSubmit();
+	// 	}
+	// }, [input]);
 
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto   bg-gray-200 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
-					{show ? (
+				<div className=" mx-auto  flex flex-col justify-center  bg-opacity-50   w-full max-w-[500px]  items-center">
+					<div className=" mb-4 flex flex-col items-center justify-center ">
+						<div className="">
+							<span
+								className=" cursor-pointer text-cyan-400 hover:to-cyan-700 "
+								onClick={() => setShow(!show)}
+							>
+								<CiCamera className=" text-6xl " />
+							</span>
+						</div>
+
+						<div className="flex space-x-4">
+							<span>OFF</span>
+							<Switch
+								checked={show}
+								onChange={setShow}
+								className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
+          relative inline-flex h-[24px] w-[50px] shrink-0  cursor-pointer rounded-full
+		   border-2 border-transparent transition-colors duration-200 ease-in-out
+		    focus:outline-none focus-visible:ring-2
+			  focus-visible:ring-white focus-visible:ring-opacity-75`}
+							>
+								{/* <span className="sr-only">Use setting</span> */}
+								<span
+									aria-hidden="true"
+									className={`${
+										show ? "translate-x-[26px]" : "translate-x-0"
+									}
+            pointer-events-none inline-block h-[20px] w-[20px] transform 
+			rounded-full bg-white shadow-lg ring-0 transition
+			 duration-200 ease-in-out`}
+								/>
+							</Switch>
+							<span>ON</span>
+						</div>
+					</div>
+
+					{show && (
 						<BarcodeScannerComponent
 							delay={1000}
 							torch={torchOn}
 							onUpdate={(err: any, result: any) => {
 								if (result) {
-									if (result.text === input) {
-										alert("This Medicine is already added");
-										return;
-									}
-									setInput(result.text);
-									setShow(false);
+									handleSubmit(result.text);
 								}
 								if (err) {
 									// console.log(err);
 								}
 							}}
 						/>
-					) : (
-						<div className="">
-							<span
-								className=" cursor-pointer "
-								onClick={() => setShow(!show)}
-							>
-								<CiCamera className="text-7xl text-gray-400 hover:to-gray-700" />
-							</span>
-						</div>
-					)}
-
-					{show && (
-						<div
-							onClick={() => setShow(false)}
-							className="absolute top-1 right-1 "
-						>
-							<span
-								className="bg-red-600 text-white p-2 rounded text-lg cursor-pointer
-						
-						"
-							>
-								Switch Carema OFF
-							</span>
-						</div>
 					)}
 				</div>
+
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
-				{data && (
-					<p className="text-white bg-red-400 " key={data._id}>
-						{data.title}
-					</p>
-				)}
-
-				<button
-					className="  bg-red-400 "
-					onClick={() => setTorchOn(!torchOn)}
+				<div
+					className="mt-2 w-full 
+				"
 				>
-					Switch Torch {torchOn ? "Off" : "On"}
-				</button>
-				<button className="bg-blue-400" onClick={() => setShow(!show)}>
-					Switch Carema {show ? "Off" : "On"}
-				</button>
+					{show && (
+						<button
+							className="  px-3 py-2 text-lg rounded-lg text-white bg-cyan-700 "
+							onClick={() => setTorchOn(!torchOn)}
+						>
+							Switch Torch {torchOn ? "Off" : "On"}
+						</button>
+					)}
+				</div>
 			</div>
+
 			<ProductsModal
 				isOpen={showProductModal}
 				setIsOpen={setShowProductModal}

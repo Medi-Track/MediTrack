@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import type { Product } from "../../types";
 import { RootState } from "../store";
+import { toast } from "react-hot-toast";
 
 export interface ScannedProductBasket {
 	medicine: Product[];
@@ -39,6 +40,8 @@ export const scannedProductSlice = createSlice({
 			state.medicine = newBasket;
 		},
 
+		// return medicine with after searching with id
+
 		increaseQuantity: (
 			state: ScannedProductBasket,
 			action: PayloadAction<{ _id: string }>
@@ -51,6 +54,7 @@ export const scannedProductSlice = createSlice({
 			if (index >= 0) {
 				newBasket[index].stock++;
 			} else {
+				toast.error("Can't increase quantity");
 				console.log("Can't increase quantity");
 			}
 			state.medicine = newBasket;
@@ -67,6 +71,7 @@ export const scannedProductSlice = createSlice({
 			if (index >= 0) {
 				if (newBasket[index].stock > 0) newBasket[index].stock--;
 			} else {
+				toast.error("Can't decrease quantity");
 				console.log("Can't decrease quantity");
 			}
 			state.medicine = newBasket;
