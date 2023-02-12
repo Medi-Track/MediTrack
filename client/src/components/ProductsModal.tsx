@@ -6,7 +6,7 @@ import Item from "./molecules/Item";
 import ScannedItem from "./molecules/scanpage/ScannedItem";
 // redux
 import { addScannedProduct } from "../redux/slice/scannedProductSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // types
 import { Product } from "../types";
 
@@ -26,22 +26,20 @@ const ProductsModal = ({
 	setIsCameraOpen,
 }: Props) => {
 	const dispatch = useDispatch();
-
 	const [stock, setStock] = useState<number>(1);
 
 	function closeModal() {
 		setIsOpen(false);
 	}
-
 	function openCamera() {
 		setIsCameraOpen(true);
 	}
-
 	const handleDispatch = () => {
 		if (!data) return;
-		dispatch(addScannedProduct({ ...data, stock: 1 }));
+		dispatch(addScannedProduct({ ...data, stock: stock }));
 		closeModal();
 		openCamera();
+		setStock(1);
 	};
 
 	return (
@@ -114,6 +112,7 @@ const ProductsModal = ({
 											onClick={() => {
 												closeModal();
 												openCamera();
+												setStock(1);
 											}}
 										>
 											Scan Again
