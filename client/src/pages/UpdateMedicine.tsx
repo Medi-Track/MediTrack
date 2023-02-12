@@ -9,7 +9,8 @@ import { BiRupee } from "react-icons/bi";
 import { BsCalendar2Date, BsCardImage, BsKeyboard } from "react-icons/bs";
 import { AiOutlineStock } from "react-icons/ai";
 import { TbListDetails } from "react-icons/tb";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -23,7 +24,7 @@ const schema = yup.object().shape({
 
 const UpdateMedicine = () => {
   const { id } = useParams();
-  
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,13 +32,37 @@ const UpdateMedicine = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  useEffect(()=>{
-    
-  })
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:${process.env.REACT_APP_PORT}/api/product/${id}`
+        );
+        reset(data);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const submitForm = (data: object) => {
+  const submitForm = async (data: object) => {
     console.log(data);
+    const updateData = async () => {
+      try {
+        const response = await axios.put(
+          `http://localhost:${process.env.REACT_APP_PORT}/api/product/update/${id}`,
+          { ...data, img: "" }
+        );
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    await updateData();
     reset();
+    navigate("/product");
   };
 
   return (

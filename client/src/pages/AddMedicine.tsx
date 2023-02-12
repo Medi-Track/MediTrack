@@ -9,6 +9,8 @@ import { BiRupee } from "react-icons/bi";
 import { BsCalendar2Date, BsCardImage, BsKeyboard } from "react-icons/bs";
 import { AiOutlineStock } from "react-icons/ai";
 import { TbListDetails } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -21,6 +23,7 @@ const schema = yup.object().shape({
 });
 
 const AddMedicine = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,9 +31,21 @@ const AddMedicine = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const submitForm = (data: object) => {
+  const submitForm = async (data: object) => {
     console.log(data);
-    reset();
+    const addData = async () => {
+      try {
+        const response = await axios.post(
+          `http://localhost:${process.env.REACT_APP_PORT}/api/product/create`,
+          { ...data, img: "" }
+        );
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    addData();
+    navigate("/product");
   };
 
   return (

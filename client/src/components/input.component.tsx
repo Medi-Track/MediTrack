@@ -1,7 +1,4 @@
-import React, { ReactElement } from "react";
-import { BsFillPhoneFill, BsKeyboard } from "react-icons/bs";
-import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
-import { AiOutlineMessage } from "react-icons/ai";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface PROPS_INTERFACE {
