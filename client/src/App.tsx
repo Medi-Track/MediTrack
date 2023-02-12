@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
+// components
+import Home from "./pages/Home";
 import ScannedMedicine from "./pages/ScannedMedicine";
-
+import Scan from "./pages/Scan";
+import Products from "./pages/Products";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Layout from "./Layout/Layout";
@@ -36,6 +36,28 @@ function App() {
       </BrowserRouter>
     </div>
   );
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<Layout>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/product" element={<Products />} />
+						<Route path="/scan" element={<Scan />} />
+						<Route
+							path="/scanned-medicine"
+							element={<ScannedMedicine />}
+						/>
+						<Route path="/aboutus" element={<AboutUs />} />
+						<Route path="/contactus" element={<ContactUs />} />
+						<Route path="/signup" element={<SignUp />} />
+						<Route path="/login" element={<Login />} />
+					</Routes>
+				</Layout>
+			</BrowserRouter>
+			<Toaster />
+		</div>
+	);
 }
 
 export default App;

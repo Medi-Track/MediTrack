@@ -24,28 +24,18 @@ router.put("/dec-medicines", async (req, res) => {
 	const medicines = req.body;
 	if (!medicines) return res.status(400).json({ message: "No items found" });
 
-	let updatedProducts = [];
-
 	try {
-		// decrease the quantity of the product by item.stock
+		// Decrease the quantity of the product by item.stock
 		medicines.forEach(async (item) => {
-			try {
-				const updatedProduct = await Product.findByIdAndUpdate(
-					item._id,
-					{
-						$dec: { stock: item.stock },
-					},
-					{ new: true }
-				);
-				updatedProducts.push(updatedProduct);
-			} catch (err) {
-				res.status(500).send({ message: "Something went wrong" });
-				console.log(err);
-			}
+			const updatedProduct = await Product.findByIdAndUpdate(
+				item._id,
+				{
+					$inc: { stock: -item.stock },
+				},
+				{ new: true }
+			);
 		});
-		updatedProducts.length > 0
-			? res.status(201).send({ message: "Product has been Removed!" })
-			: res.status(400).send({ message: "Product not found" });
+		res.status(201).json({ message: "Product has been Removed!" });
 	} catch (err) {
 		res.status(500).json({ message: "Something went wrong" });
 		console.log(err);
@@ -104,6 +94,17 @@ router.delete("/:id", async (req, res) => {
 	} catch (err) {
 		res.status(500).json({ message: "Something went wrong" });
 		console.log(err);
+	}
+});
+
+// get a product with id
+router.get("/:id", async (req, res) => {
+	try {
+		const product = await Product.findById(req.params.id);
+		res.status(200).json(product);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ message: "Something went wrong" });
 	}
 });
 
