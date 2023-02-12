@@ -16,6 +16,7 @@ const productSchema = new mongoose.Schema(
 		brand: { type: String, trim: true },
 		uniq_id: { type: String, required: true },
 		stock: { type: Number, default: 0 },
+		expiring_date: { type: String, trim: true },
 	},
 	{ timestamps: true }
 );
