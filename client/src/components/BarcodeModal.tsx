@@ -56,14 +56,13 @@ const BarcodeModal = ({ isOpen, setIsOpen, title, uniq_id }: Props) => {
 										{title}
 									</Dialog.Title> */}
 
-
 									<div className="mt-2 flex justify-center" ref={barcodeRef}>
 										<Barcode width={3} height={150} displayValue={false} value={uniq_id} />
 									</div>
 
-									<div className="mt-8 flex items-center justify-between">
+									<div className="mt-8 flex justify-between items-center">
 										<button
-											className="text-3xl"
+											className="text-3xl text-[var(--primary-text-color)] hover:bg-[var(--shadow-color)] hover:text-[var(--tertiary-text-color)] p-2 rounded-full"
 											onClick={() => exportAsImage(barcodeRef.current, `${title}${Date.now()}.png`)}
 										>
 											<BiDownload />
