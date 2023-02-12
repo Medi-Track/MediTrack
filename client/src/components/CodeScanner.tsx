@@ -56,7 +56,30 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto  relative bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
+				<div className="flex mx-auto  relative bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px]  items-center">
+					<div className="absolute top-0 ">
+						<Switch
+							checked={show}
+							onChange={setShow}
+							className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
+          relative inline-flex h-[18px] w-[40px] shrink-0  cursor-pointer rounded-full
+		   border-2 border-transparent transition-colors duration-200 ease-in-out
+		    focus:outline-none focus-visible:ring-2
+			  focus-visible:ring-white focus-visible:ring-opacity-75`}
+						>
+							{/* <span className="sr-only">Use setting</span> */}
+							<span
+								aria-hidden="true"
+								className={`${
+									show ? "translate-x-[23px]" : "translate-x-0"
+								}
+            pointer-events-none inline-block h-[15px] w-[15px] transform 
+			rounded-full bg-white shadow-lg ring-0 transition
+			 duration-200 ease-in-out`}
+							/>
+						</Switch>
+					</div>
+
 					{show ? (
 						<BarcodeScannerComponent
 							delay={1000}
@@ -80,38 +103,9 @@ function CodeScanner() {
 							</span>
 						</div>
 					)}
-
-					<div className="absolute top-0 right-0">
-						<Switch
-							checked={show}
-							onChange={setShow}
-							className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
-          relative inline-flex h-[18px] w-[40px] shrink-0  cursor-pointer rounded-full
-		   border-2 border-transparent transition-colors duration-200 ease-in-out
-		    focus:outline-none focus-visible:ring-2
-			  focus-visible:ring-white focus-visible:ring-opacity-75`}
-						>
-							{/* <span className="sr-only">Use setting</span> */}
-							<span
-								aria-hidden="true"
-								className={`${
-									show ? "translate-x-[23px]" : "translate-x-0"
-								}
-            pointer-events-none inline-block h-[15px] w-[15px] transform 
-			rounded-full bg-white shadow-lg ring-0 transition
-			 duration-200 ease-in-out`}
-							/>
-						</Switch>
-					</div>
 				</div>
 
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
-
-				{data && (
-					<p className="text-white bg-red-400 " key={data._id}>
-						{data.title}
-					</p>
-				)}
 
 				<div
 					className="mt-8 w-full 
@@ -133,6 +127,7 @@ function CodeScanner() {
 					</button>
 				</div>
 			</div>
+
 			<ProductsModal
 				isOpen={showProductModal}
 				setIsOpen={setShowProductModal}
