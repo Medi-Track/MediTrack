@@ -153,7 +153,7 @@ const ContactUs = () => {
                 register={register}
                 type="text"
                 name="message"
-                placeholder="username..."
+                placeholder="message..."
                 errorMessage={errors.message?.message as string}
                 rows={6}
               ></Input>

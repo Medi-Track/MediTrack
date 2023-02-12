@@ -34,7 +34,7 @@ const LogIn = () => {
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
 
-        <div className="flex flex-col gap-4 mt-12">
+        <div className="flex flex-col gap-4 mt-8">
           <Input
             register={register}
             type="text"
