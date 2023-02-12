@@ -22,7 +22,7 @@ const ScannedMedicine = () => {
 				medicines
 			);
 			// console.log("data", data);
-			toast.success(data.message);
+			toast.success("Medicines added");
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
@@ -38,7 +38,8 @@ const ScannedMedicine = () => {
 				medicines
 			);
 			// console.log("data", data);
-			toast.success(data.message);
+			// toast.success(data.message);
+			toast.success("Medicines removed");
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
