@@ -81,7 +81,7 @@ function CodeScanner() {
 								<span
 									aria-hidden="true"
 									className={`${
-										show ? "translate-x-[28px]" : "translate-x-0"
+										show ? "translate-x-[26px]" : "translate-x-0"
 									}
             pointer-events-none inline-block h-[20px] w-[20px] transform 
 			rounded-full bg-white shadow-lg ring-0 transition
@@ -116,18 +116,12 @@ function CodeScanner() {
 				>
 					{show && (
 						<button
-							className=" w-full bg-red-400 "
+							className="  px-3 text-lg text-white bg-cyan-700 "
 							onClick={() => setTorchOn(!torchOn)}
 						>
 							Switch Torch {torchOn ? "Off" : "On"}
 						</button>
 					)}
-					<button
-						className=" w-full bg-blue-400"
-						onClick={() => setShow(!show)}
-					>
-						Switch Carema {show ? "Off" : "On"}
-					</button>
 				</div>
 			</div>
 
