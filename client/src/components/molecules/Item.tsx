@@ -34,7 +34,7 @@ const Item = ({ item, singleItem }: any) => {
 				</span>
 			</div>
 			<div className="text-right">₹{item.price}</div>
-			<button className="rounded m-l-6 p-1 bg-cyan-400 hover:bg-zinc-900 hover:text-cyan-400">
+			<button className="rounded m-l-6 p-1 cursor-default bg-cyan-400 hover:text-cyan-400">
 				₹{item.stock * item.price}
 			</button>
 		</li>

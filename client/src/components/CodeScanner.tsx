@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import axios from "axios";
+import { Switch } from "@headlessui/react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { addProduct } from "../redux/slice/productSlice";
-import { Product } from "../types";
 import BarcodeScanner from "./molecules/BarcodeScanner";
 
 import { CiCamera } from "react-icons/ci";
 import ProductsModal from "./ProductsModal";
+
+import { Product } from "../types";
 
 function CodeScanner() {
 	const products = useSelector((state: RootState) => state.product.items);
@@ -19,15 +21,14 @@ function CodeScanner() {
 
 	const [torchOn, setTorchOn] = useState(false);
 	const [show, setShow] = useState(false);
-
+	const [enabled, setEnabled] = useState(false);
 	const [showProductModal, setShowProductModal] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!products) {
 			console.log("products", products);
 		}
-		console.log("data in use effect", data);
-	}, [data]);
+	}, []);
 
 	const handleSubmit = () => {
 		console.log(input);
@@ -55,7 +56,7 @@ function CodeScanner() {
 	return (
 		<>
 			<div className=" flex flex-col">
-				<div className="flex mx-auto   bg-gray-200 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
+				<div className="flex mx-auto  relative bg-cyan-100 bg-opacity-50 justify-center  w-full max-w-[500px] h-[500px] items-center">
 					{show ? (
 						<BarcodeScannerComponent
 							delay={1000}
@@ -77,28 +78,33 @@ function CodeScanner() {
 					) : (
 						<div className="">
 							<span
-								className=" cursor-pointer "
+								className=" cursor-pointer text-cyan-400 hover:to-cyan-700 "
 								onClick={() => setShow(!show)}
 							>
-								<CiCamera className="text-7xl text-gray-400 hover:to-gray-700" />
+								<CiCamera className="text-7xl " />
 							</span>
 						</div>
 					)}
 
-					{show && (
-						<div
-							onClick={() => setShow(false)}
-							className="absolute top-1 right-1 "
-						>
-							<span
-								className="bg-red-600 text-white p-2 rounded text-lg cursor-pointer
-						
-						"
+					{
+						<div className="absolute top-0 right-0">
+							<Switch
+								checked={show}
+								onChange={setShow}
+								className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
+          relative inline-flex h-[18px] w-[40px] shrink-0  cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
 							>
-								Switch Carema OFF
-							</span>
+								<span className="sr-only">Use setting</span>
+								<span
+									aria-hidden="true"
+									className={`${
+										show ? "translate-x-[23px]" : "translate-x-0"
+									}
+            pointer-events-none inline-block h-[15px] w-[15px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+								/>
+							</Switch>
 						</div>
-					)}
+					}
 				</div>
 				{/* {show && <BarcodeScanner onResult={onDetect} />} */}
 
@@ -108,15 +114,25 @@ function CodeScanner() {
 					</p>
 				)}
 
-				<button
-					className="  bg-red-400 "
-					onClick={() => setTorchOn(!torchOn)}
+				<div
+					className="mt-8 w-full 
+				"
 				>
-					Switch Torch {torchOn ? "Off" : "On"}
-				</button>
-				<button className="bg-blue-400" onClick={() => setShow(!show)}>
-					Switch Carema {show ? "Off" : "On"}
-				</button>
+					{show && (
+						<button
+							className=" w-full bg-red-400 "
+							onClick={() => setTorchOn(!torchOn)}
+						>
+							Switch Torch {torchOn ? "Off" : "On"}
+						</button>
+					)}
+					<button
+						className=" w-full bg-blue-400"
+						onClick={() => setShow(!show)}
+					>
+						Switch Carema {show ? "Off" : "On"}
+					</button>
+				</div>
 			</div>
 			<ProductsModal
 				isOpen={showProductModal}
