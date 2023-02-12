@@ -37,7 +37,7 @@ const UpdateMedicine = () => {
 		const fetchData = async () => {
 			try {
 				const { data } = await axios.get(
-					`http://localhost:${process.env.REACT_APP_PORT}/api/product/${id}`
+					`${process.env.REACT_APP_PORT_SERVER}/api/product/${id}`
 				);
 				reset(data);
 				console.log(data);
@@ -53,7 +53,7 @@ const UpdateMedicine = () => {
 		const updateData = async () => {
 			try {
 				const response = await axios.put(
-					`http://localhost:${process.env.REACT_APP_PORT}/api/product/update/${id}`,
+					`${process.env.REACT_APP_PORT_SERVER}/api/product/update/${id}`,
 					{ ...data, img: "" }
 				);
 				console.log(response);

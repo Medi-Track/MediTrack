@@ -37,7 +37,7 @@ const AddMedicine = () => {
 		const addData = async () => {
 			try {
 				const response = await axios.post(
-					`http://localhost:${process.env.REACT_APP_PORT}/api/product/create`,
+					`${process.env.REACT_APP_PORT_SERVER}/api/product/create`,
 					{ ...data, img: "" }
 				);
 				console.log(response);

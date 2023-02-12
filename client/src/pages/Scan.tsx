@@ -19,7 +19,7 @@ const Home = () => {
 	const getProducts = async () => {
 		try {
 			const { data } = await axios.get(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product`
+				`${process.env.REACT_APP_PORT_SERVER}/api/product`
 			);
 			dispatch(addProduct(data));
 		} catch (err) {

@@ -18,7 +18,7 @@ const ScannedMedicine = () => {
 		//axios call to add medicines to the database
 		try {
 			const { data } = await axios.put(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product/inc-medicines`,
+				`${process.env.REACT_APP_PORT_SERVER}/api/product/inc-medicines`,
 				medicines
 			);
 			// console.log("data", data);
@@ -34,7 +34,7 @@ const ScannedMedicine = () => {
 		//axios call to add medicines to the database
 		try {
 			const { data } = await axios.put(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product/dec-medicines`,
+				`${process.env.REACT_APP_PORT_SERVER}/api/product/dec-medicines`,
 				medicines
 			);
 			// console.log("data", data);

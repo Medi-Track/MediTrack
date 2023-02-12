@@ -35,7 +35,7 @@ const Products = () => {
 	const getProducts = async () => {
 		try {
 			const { data } = await axios.get(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product`
+				`${process.env.REACT_APP_PORT_SERVER}/api/product`
 			);
 
 			dispatch(addProduct(data));
@@ -58,7 +58,7 @@ const Products = () => {
 					(product) => {
 						try {
 							const data = axios.post(
-								`http://localhost:${process.env.REACT_APP_PORT}/api/product/create`,
+								`${process.env.REACT_APP_PORT_SERVER}/api/product/create`,
 								product
 							);
 							console.log(data);
@@ -81,7 +81,7 @@ const Products = () => {
 	const handleDelete = async (product: Product) => {
 		try {
 			const data = await axios.delete(
-				`http://localhost:${process.env.REACT_APP_PORT}/api/product/${product._id}`
+				`${process.env.REACT_APP_PORT_SERVER}/api/product/${product._id}`
 			);
 			console.log(data);
 			dispatch(removeProduct(product));
