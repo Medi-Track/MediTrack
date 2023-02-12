@@ -18,7 +18,6 @@ const Products = () => {
     const navigate = useNavigate();
 
     const products = useSelector((state: RootState) => state.product.items);
-
     const getProducts = async () => {
         try {
             const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/product`);
@@ -59,14 +58,14 @@ const Products = () => {
         <div>
             <ul className='border-b'>
                 <li className='p-2 grid gap-8 grid-cols-[3fr_1fr_1fr_0.5fr_1fr_1fr]'>
-                    <div className='font-bold flex items-center'>
+                    <div className='flex items-center font-bold'>
                         <p>Title</p>
                     </div>
-                    <div className='font-bold flex items-center'>
+                    <div className='flex items-center font-bold'>
                         <p>Stock</p>
                     </div>
 
-                    <div className='p-r-2 font-bold text-right'>
+                    <div className='font-bold text-right p-r-2'>
                         <p className='text-right'>Price</p>
                     </div>
                 </li>

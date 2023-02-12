@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+//toast
+import toast from "react-hot-toast";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import Item from "../components/molecules/Item";
@@ -19,8 +21,11 @@ const ScannedMedicine = () => {
 				`http://localhost:${process.env.REACT_APP_PORT}/api/product/inc-medicines`,
 				medicines
 			);
-			console.log("data", data);
-		} catch (err) {
+			// console.log("data", data);
+			toast.success(data.message);
+		} catch (err: any) {
+			// condition with toast
+			toast.error(err?.message);
 			console.log(err);
 		}
 	};
@@ -31,8 +36,11 @@ const ScannedMedicine = () => {
 				`http://localhost:${process.env.REACT_APP_PORT}/api/product/dec-medicines`,
 				medicines
 			);
-			console.log("data", data);
-		} catch (err) {
+			// console.log("data", data);
+			toast.success(data.message);
+		} catch (err: any) {
+			// condition with toast
+			toast.error(err?.message);
 			console.log(err);
 		}
 	};
