@@ -9,6 +9,7 @@ import type { RootState } from "../redux/store";
 import CodeScanner from "../components/CodeScanner";
 import ScannedItem from "../components/molecules/scanpage/ScannedItem";
 import ScannedMedicine from "./ScannedMedicine";
+import { toast } from "react-hot-toast";
 // const socket = io("http://localhost:5000");
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
 			);
 			dispatch(addProduct(data));
 		} catch (err) {
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};

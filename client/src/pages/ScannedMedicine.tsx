@@ -26,6 +26,7 @@ const ScannedMedicine = () => {
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};
@@ -41,6 +42,7 @@ const ScannedMedicine = () => {
 		} catch (err: any) {
 			// condition with toast
 			toast.error(err?.message);
+			toast.error("Something went wrong");
 			console.log(err);
 		}
 	};
