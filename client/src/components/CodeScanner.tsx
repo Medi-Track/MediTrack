@@ -72,7 +72,7 @@ function CodeScanner() {
 								checked={show}
 								onChange={setShow}
 								className={`${show ? "bg-cyan-700" : "bg-cyan-400"}
-          relative inline-flex h-[24px] w-[50px] shrink-0  cursor-pointer rounded-full
+          relative inline-flex h-[22px] w-[50px] shrink-0  cursor-pointer rounded-full
 		   border-2 border-transparent transition-colors duration-200 ease-in-out
 		    focus:outline-none focus-visible:ring-2
 			  focus-visible:ring-white focus-visible:ring-opacity-75`}
@@ -81,9 +81,9 @@ function CodeScanner() {
 								<span
 									aria-hidden="true"
 									className={`${
-										show ? "translate-x-[26px]" : "translate-x-0"
+										show ? "translate-x-[28px]" : "translate-x-[2px]"
 									}
-            pointer-events-none inline-block h-[20px] w-[20px] transform 
+            pointer-events-none inline-block mt-[1px] h-[20px] w-[20px] transform 
 			rounded-full bg-white shadow-lg ring-0 transition
 			 duration-200 ease-in-out`}
 								/>
