@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Product = require("../models/product");
 const uniqid = require("uniqid");
 
-//Create Products
+
 router.post("/create", async (req, res) => {
 	console.log(req.body);
 	let uniq_id = uniqid.process();
